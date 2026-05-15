@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jhaz · Plan Comercial 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,200..700,0..100;1,9..144,200..700,0..100&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #090909;
+  --bg2: #111111;
+  --bg3: #191919;
+  --border: #252525;
+  --border2: #333333;
+  --gold: #C9A55A;
+  --gold-dim: #8A6E3A;
+  --gold-bg: #16120A;
+  --text: #F0EBE0;
+  --text2: #968E80;
+  --text3: #504A42;
+  --success: #5AA878;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ======= NAVIGATION ======= */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px;
+  height: 56px;
+  background: rgba(9,9,9,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand { font-family: 'Fraunces', serif; font-size: 18px; font-style: italic; color: var(--gold); }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--text2); text-decoration: none;
+  transition: color 200ms;
+}
+.nav-links a:hover { color: var(--gold); }
+
+/* ======= SECTIONS ======= */
+.section {
+  min-height: 100vh;
+  padding: 120px 80px 80px;
+  position: relative;
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Section ambient glow */
+.section::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+}
+.s1::before { background: radial-gradient(800px 600px at 100% 0%, rgba(201,165,90,0.07), transparent 60%); }
+.s2::before { background: radial-gradient(600px 600px at 0% 100%, rgba(201,165,90,0.04), transparent 60%); }
+.s3::before { background: radial-gradient(700px 500px at 100% 50%, rgba(201,165,90,0.05), transparent 60%); }
+
+/* Section tag */
+.section-tag {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 40px;
+}
+.section-tag::after {
+  content: ''; flex: 0 0 40px; height: 1px; background: var(--gold); opacity: 0.5;
+}
+
+/* Tesis headline */
+.tesis {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+.tesis em { font-style: italic; color: var(--gold); }
+.tesis-xl { font-size: clamp(48px, 6vw, 80px); }
+.tesis-lg { font-size: clamp(38px, 4.5vw, 60px); }
+.tesis-md { font-size: clamp(28px, 3.5vw, 44px); }
+
+/* Support text */
+.support {
+  font-size: 17px; color: var(--text2); line-height: 1.65;
+  max-width: 680px;
+}
+.support + .support { margin-top: 12px; }
+
+/* ======= PORTADA ======= */
+.portada-layout { max-width: 1000px; }
+.portada-sub {
+  font-size: 16px; color: var(--text2); margin-bottom: 56px;
+  max-width: 560px; line-height: 1.6;
+}
+.portada-stats {
+  display: flex; gap: 0;
+  border-top: 1px solid var(--border);
+  margin-top: 72px; padding-top: 48px;
+}
+.portada-stat {
+  flex: 1; padding-right: 48px; margin-right: 48px;
+  border-right: 1px solid var(--border);
+}
+.portada-stat:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 52px; font-weight: 300; line-height: 1;
+  letter-spacing: -0.03em; color: var(--text);
+  margin-bottom: 10px;
+}
+.stat-num span { color: var(--gold); font-style: italic; }
+.stat-label { font-size: 13px; color: var(--text2); line-height: 1.45; }
+.portada-meta {
+  position: absolute; bottom: 60px; right: 80px;
+  text-align: right; font-size: 12px; color: var(--text3);
+  line-height: 1.7;
+}
+
+/* ======= DIAGNÓSTICO ======= */
+.diag-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.diag-left { }
+.diag-right { margin-top: 8px; }
+
+.gap-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.gap-table tr { border-bottom: 1px solid var(--border); }
+.gap-table tr:last-child { border-bottom: 0; }
+.gap-table td {
+  padding: 16px 0; font-size: 14px; vertical-align: middle;
+}
+.gap-table .col-hoy {
+  color: var(--text2); padding-right: 20px;
+  font-size: 13px;
+}
+.gap-table .col-arrow {
+  color: var(--gold); font-size: 16px; padding: 0 16px; white-space: nowrap;
+  font-family: 'Fraunces', serif;
+}
+.gap-table .col-opp {
+  color: var(--text); font-weight: 500;
+}
+
+.activos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+.activo {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;
+  padding: 18px 20px;
+}
+.activo-num {
+  font-family: 'Fraunces', serif; font-size: 30px; font-weight: 300;
+  color: var(--gold); line-height: 1; margin-bottom: 6px; font-style: italic;
+}
+.activo-label { font-size: 12px; color: var(--text2); }
+
+/* ======= FUNNEL ======= */
+.funnel-stages {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 2px; margin: 40px 0;
+}
+.funnel-stage {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 4px;
+  padding: 28px 20px; text-align: center;
+  position: relative;
+  transition: background 200ms, border-color 200ms;
+}
+.funnel-stage:not(:last-child)::after {
+  content: '→';
+  position: absolute; right: -16px; top: 50%; transform: translateY(-50%);
+  color: var(--gold); font-size: 18px; z-index: 1;
+}
+.stage-num {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 12px;
+}
+.stage-name {
+  font-family: 'Fraunces', serif; font-size: 20px; font-weight: 400;
+  color: var(--text); margin-bottom: 10px;
+}
+.stage-tool {
+  font-size: 11px; color: var(--text2); line-height: 1.5;
+}
+.stage-metric {
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--gold); font-weight: 500;
+}
+
+.funnel-sub { font-size: 14px; color: var(--text2); margin-top: 32px; line-height: 1.6; }
+
+/* ======= STACK ======= */
+.stack-phases { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 12px; }
+.phase-block { }
+.phase-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0; border-bottom: 2px solid var(--border);
+  margin-bottom: 0;
+}
+.phase-title { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+.phase-title.free { color: var(--success); }
+.phase-title.paid { color: var(--gold); }
+.phase-cost { font-size: 22px; font-family: 'Fraunces', serif; font-weight: 300; }
+
+.tool-row { display: grid; grid-template-columns: 1fr auto; border-bottom: 1px solid var(--border); }
+.tool-row:last-child { border-bottom: 0; }
+.tool-row td { padding: 14px 0; font-size: 14px; vertical-align: top; }
+.tool-name { color: var(--text); font-weight: 500; }
+.tool-use { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.tool-cost { text-align: right; color: var(--text2); font-size: 13px; padding-left: 16px; }
+.tool-cost.free { color: var(--success); }
+.tool-cost.paid { color: var(--gold); }
+
+.stack-total {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--border2); margin-top: 24px;
+  padding-top: 24px;
+  display: flex; gap: 40px;
+}
+.total-item { }
+.total-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
+.total-val { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 300; }
+
+/* ======= ROADMAP ======= */
+.roadmap-phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 40px; }
+.road-phase { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.road-header {
+  padding: 24px 28px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg3);
+}
+.road-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.road-period {
+  font-family: 'Fraunces', serif; font-size: 26px; font-weight: 300; letter-spacing: -0.01em;
+}
+.road-obj { font-size: 12px; color: var(--text2); margin-top: 6px; }
+.road-body { padding: 24px 28px; }
+.road-items { list-style: none; }
+.road-items li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--text2); margin-bottom: 12px; line-height: 1.45;
+}
+.road-items li::before { content: '—'; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+.road-items li strong { color: var(--text); }
+.road-outcome {
+  margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);
+  font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ======= CIERRE ======= */
+.cierre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.cierre-asks { }
+.ask-row {
+  display: flex; align-items: flex-start; gap: 20px;
+  padding: 22px 0; border-bottom: 1px solid var(--border);
+}
+.ask-row:last-child { border-bottom: 0; }
+.ask-num {
+  font-family: 'Fraunces', serif; font-size: 36px; font-weight: 300;
+  color: var(--gold); line-height: 1; min-width: 40px; font-style: italic;
+}
+.ask-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.ask-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+.cierre-right .tesis { margin-bottom: 24px; }
+.cierre-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--gold); color: #0A0A0A;
+  padding: 14px 28px; border-radius: 4px;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none;
+  margin-top: 8px;
+}
+
+/* ======= PRINT ======= */
+@media print {
+  .nav { display: none !important; }
+  .section { page-break-after: always; min-height: 297mm; padding: 48px 56px; }
+  .section:last-child { page-break-after: avoid; }
+  body { background: #090909 !important; color: #F0EBE0 !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 900px) {
+  .section { padding: 100px 40px 60px; }
+  .diag-layout, .cierre-grid { grid-template-columns: 1fr; gap: 48px; }
+  .funnel-stages { grid-template-columns: 1fr; }
+  .funnel-stage:not(:last-child)::after { content: '↓'; right: auto; left: 50%; transform: translateX(-50%); top: auto; bottom: -18px; }
+  .stack-phases, .roadmap-phases { grid-template-columns: 1fr; }
+  .portada-stats { flex-direction: column; gap: 32px; }
+  .portada-stat { border-right: 0; border-bottom: 1px solid var(--border); margin-right: 0; padding-right: 0; padding-bottom: 32px; }
+  .portada-stat:last-child { border-bottom: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav de navegación rápida (solo pantalla) -->
+<nav class="nav">
+  <span class="nav-brand">Jhaz · 2026</span>
+  <div class="nav-links">
+    <a href="#s1">Portada</a>
+    <a href="#s2">Diagnóstico</a>
+    <a href="#s3">Funnel</a>
+    <a href="#s4">Stack</a>
+    <a href="#s5">Roadmap</a>
+  </div>
+</nav>
+
+<!-- ===== S1: PORTADA ===== -->
+<section class="section s1" id="s1">
+  <div class="portada-layout">
+    <div class="section-tag">Plan de trabajo comercial · Mayo 2026</div>
+
+    <h1 class="tesis tesis-xl">
+      Escalar la<br>operación.
+    </h1>
+
+    <p class="portada-sub">
+      Propuesta de modernización comercial y captación digital para Jhaz Operador Logístico SAC. Un sistema que convierte experiencia operativa en demanda constante.
+    </p>
+
+    <div style="display: flex; align-items: center; gap: 14px; font-size: 12px; color: var(--text2);">
+      <span style="color: var(--text);">Presentado por:</span>
+      <span>Ejecutivo Comercial · Área de Ventas</span>
+    </div>
+
+    <div class="portada-stats">
+      <div class="portada-stat">
+        <div class="stat-num">10<span>+</span></div>
+        <div class="stat-label">años de operación real en el mercado peruano</div>
+      </div>
+      <div class="portada-stat">
+        <div class="stat-num"><span>₿</span>30</div>
+        <div class="stat-label">días de crédito · diferenciador que la competencia no puede replicar fácilmente</div>
+      </div>
+      <div class="portada-stat">
+        <div class="stat-num">10<span>k</span></div>
+        <div class="stat-label">empresas top de Perú en base de datos lista para trabajar</div>
+      </div>
+    </div>
+  </div>
+  <div class="portada-meta">
+    Jhaz Operador Logístico S.A.C.<br>
+    RUC 20600135261 · RNP activo · SUNAT Importador/Exportador<br>
+    Confidencial · Mayo 2026
+  </div>
+</section>
+
+<!-- ===== S2: DIAGNÓSTICO ===== -->
+<section class="section s2" id="s2">
+  <div class="section-tag">01 · Diagnóstico</div>
+
+  <div class="diag-layout">
+    <div class="diag-left">
+      <h2 class="tesis tesis-lg">
+        Los activos<br>ya <em>existen</em>.
+      </h2>
+      <p class="support" style="margin-bottom: 32px;">
+        Jhaz tiene una base operativa real y valiosa construida en una década. El siguiente paso natural es potenciar esa base con un sistema comercial que genere demanda de forma constante.
+      </p>
+
+      <div style="margin-top: 16px;">
+        <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-bottom: 20px;">Activos estratégicos disponibles hoy</div>
+        <div class="activos">
+          <div class="activo">
+            <div class="activo-num">10<sup style="font-size: 18px;">+</sup></div>
+            <div class="activo-label">Años de experiencia y operación real</div>
+          </div>
+          <div class="activo">
+            <div class="activo-num">Cred.</div>
+            <div class="activo-label">Línea de crédito 30 días · ventaja única</div>
+          </div>
+          <div class="activo">
+            <div class="activo-num">Track</div>
+            <div class="activo-label">Tracking activo · base para portal cliente</div>
+          </div>
+          <div class="activo">
+            <div class="activo-num">10k</div>
+            <div class="activo-label">Base de datos top empresas Perú</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="diag-right">
+      <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-bottom: 20px;">Oportunidades de escalamiento</div>
+
+      <table class="gap-table">
+        <tbody>
+          <tr>
+            <td class="col-hoy">Referidos y WhatsApp</td>
+            <td class="col-arrow">→</td>
+            <td class="col-opp">Pipeline comercial estructurado</td>
+          </tr>
+          <tr>
+            <td class="col-hoy">Seguimiento manual</td>
+            <td class="col-arrow">→</td>
+            <td class="col-opp">CRM + automatización</td>
+          </tr>
+          <tr>
+            <td class="col-hoy">Web institucional sin SEO</td>
+            <td class="col-arrow">→</td>
+            <td class="col-opp">Motor de captación de leads</td>
+          </tr>
+          <tr>
+            <td class="col-hoy">Excels aislados</td>
+            <td class="col-arrow">→</td>
+            <td class="col-opp">CRM centralizado con métricas</td>
+          </tr>
+          <tr>
+            <td class="col-hoy">Grupos WhatsApp manuales</td>
+            <td class="col-arrow">→</td>
+            <td class="col-opp">Portal cliente con tracking propio</td>
+          </tr>
+          <tr>
+            <td class="col-hoy">BD sin trabajar</td>
+            <td class="col-arrow">→</td>
+            <td class="col-opp">Outreach segmentado por industria</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top: 32px; padding: 20px 24px; background: var(--gold-bg); border: 1px solid #2A2008; border-radius: 6px;">
+        <div style="font-size: 12px; color: var(--gold); font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em;">El diferenciador más poderoso</div>
+        <div style="font-family: 'Fraunces', serif; font-size: 20px; font-weight: 300; line-height: 1.3;">El crédito 30 días no es un beneficio.<br>Es una <em style="color: var(--gold);">categoría propia</em>.</div>
+        <div style="font-size: 13px; color: var(--text2); margin-top: 10px;">La mayoría de transportistas compite por precio. Jhaz puede competir por <strong style="color: var(--text);">financiamiento operativo</strong>. Eso cambia completamente el marketing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S3: FUNNEL ===== -->
+<section class="section s3" id="s3">
+  <div class="section-tag">02 · Funnel comercial</div>
+
+  <h2 class="tesis tesis-lg" style="max-width: 700px;">
+    Un sistema constante<br>de <em>generación de demanda</em>.
+  </h2>
+
+  <p class="support" style="margin-bottom: 0;">
+    Hoy la operación comercial depende de referidos y llamadas manuales. Esto no escala. El funnel convierte el sitio web, LinkedIn y la base de datos en una máquina de leads que trabaja sola.
+  </p>
+
+  <div class="funnel-stages">
+    <div class="funnel-stage">
+      <div class="stage-num">01</div>
+      <div class="stage-name">Atracción</div>
+      <div class="stage-tool">Web + SEO · Google · LinkedIn · BD 10k</div>
+      <div class="stage-metric">Llegan al sitio</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="stage-num">02</div>
+      <div class="stage-name">Captura</div>
+      <div class="stage-tool">Cotizador web · Lead magnets · Formularios</div>
+      <div class="stage-metric">Dejan sus datos</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="stage-num">03</div>
+      <div class="stage-name">Nutrición</div>
+      <div class="stage-tool">Email seq. · WhatsApp · Contenido guías</div>
+      <div class="stage-metric">Se calientan solos</div>
+    </div>
+    <div class="funnel-stage" style="border-color: #2A2008; background: var(--gold-bg);">
+      <div class="stage-num" style="color: var(--gold);">04</div>
+      <div class="stage-name">Conversión</div>
+      <div class="stage-tool">Reunión + propuesta · CRM pipeline</div>
+      <div class="stage-metric" style="color: var(--gold);">Cierran ventas</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="stage-num">05</div>
+      <div class="stage-name">Fidelización</div>
+      <div class="stage-tool">Portal cliente · Tracking · Crédito</div>
+      <div class="stage-metric">Recompran y refieren</div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px;">
+    <div style="padding: 20px 24px; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;">
+      <div style="font-family: 'Fraunces', serif; font-size: 36px; font-weight: 300; color: var(--gold); margin-bottom: 8px;">Web</div>
+      <div style="font-size: 13px; color: var(--text2);">La nueva web con cotizador en vivo, página dedicada de crédito, SEO y schema markup para Google e IAs actúa como el primer filtro del funnel — califica leads antes de que llamen.</div>
+    </div>
+    <div style="padding: 20px 24px; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;">
+      <div style="font-family: 'Fraunces', serif; font-size: 36px; font-weight: 300; color: var(--gold); margin-bottom: 8px;">BD</div>
+      <div style="font-size: 13px; color: var(--text2);">Los 10k contactos validados y segmentados se trabajan con secuencias de email por industria (alimentos, retail, construcción, importadores). Cada secuencia: 3 correos + 2 LinkedIn + 1 llamada en 14 días.</div>
+    </div>
+    <div style="padding: 20px 24px; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;">
+      <div style="font-family: 'Fraunces', serif; font-size: 36px; font-weight: 300; color: var(--gold); margin-bottom: 8px;">Portal</div>
+      <div style="font-size: 13px; color: var(--text2);">El portal del cliente automatiza el seguimiento de envíos (hoy en grupos WhatsApp manuales), ahorra 5 horas semanales del equipo y eleva la percepción de marca desde el primer envío.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S4: STACK ===== -->
+<section class="section" id="s4">
+  <div class="section-tag">03 · Stack tecnológico</div>
+
+  <h2 class="tesis tesis-lg" style="max-width: 760px;">
+    Arrancamos con<br><em>cero inversión</em>.
+  </h2>
+
+  <p class="support" style="margin-bottom: 40px;">
+    Mes 1: todo gratis. Solo cuando haya tracción medible con datos del CRM, se suma lo pagado. La inversión total del año no supera lo que cuesta 2 semanas de un analista.
+  </p>
+
+  <div class="stack-phases">
+    <!-- GRATIS -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-title free">Mes 1 · Gratis</span>
+        <span class="phase-cost" style="color: var(--success);">$0 / mes</span>
+      </div>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tbody>
+          <tr class="tool-row">
+            <td style="padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--border);">
+              <div class="tool-name">HubSpot CRM</div>
+              <div class="tool-use">Pipeline · contactos · tracking de emails</div>
+            </td>
+            <td style="padding: 14px 0; font-size: 13px; border-bottom: 1px solid var(--border); text-align: right; color: var(--success);">Gratis</td>
+          </tr>
+          <tr class="tool-row">
+            <td style="padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--border);">
+              <div class="tool-name">WhatsApp Business</div>
+              <div class="tool-use">Canal comercial #1 en B2B Perú</div>
+            </td>
+            <td style="padding: 14px 0; font-size: 13px; border-bottom: 1px solid var(--border); text-align: right; color: var(--success);">Gratis</td>
+          </tr>
+          <tr class="tool-row">
+            <td style="padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--border);">
+              <div class="tool-name">Google Analytics 4 + Search Console</div>
+              <div class="tool-use">Tráfico web y SEO · métricas de conversión</div>
+            </td>
+            <td style="padding: 14px 0; font-size: 13px; border-bottom: 1px solid var(--border); text-align: right; color: var(--success);">Gratis</td>
+          </tr>
+          <tr class="tool-row">
+            <td style="padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--border);">
+              <div class="tool-name">Microsoft Clarity</div>
+              <div class="tool-use">Grabaciones y mapas de calor de la web</div>
+            </td>
+            <td style="padding: 14px 0; font-size: 13px; border-bottom: 1px solid var(--border); text-align: right; color: var(--success);">Gratis</td>
+          </tr>
+          <tr class="tool-row">
+            <td style="padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--border);">
+              <div class="tool-name">Notion + Brevo + Hunter.io</div>
+              <div class="tool-use">Docs compartidos · newsletter · búsqueda emails</div>
+            </td>
+            <td style="padding: 14px 0; font-size: 13px; border-bottom: 1px solid var(--border); text-align: right; color: var(--success);">Gratis</td>
+          </tr>
+          <tr class="tool-row">
+            <td style="padding: 14px 0; font-size: 14px;">
+              <div class="tool-name">Sitio web nuevo · Hosting Vercel</div>
+              <div class="tool-use">Con cotizador, portal cliente y SEO técnico</div>
+            </td>
+            <td style="padding: 14px 0; font-size: 13px; text-align: right; color: var(--success);">Gratis</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PAGADO -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-title paid">Mes 2-3 · Cuando lleguen leads</span>
+        <span class="phase-cost" style="color: var(--gold);">~$190 / mes</span>
+      </div>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tbody>
+          <tr class="tool-row">
+            <td style="padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--border);">
+              <div class="tool-name">Apollo.io</div>
+              <div class="tool-use">BD global B2B + secuencias email automatizadas</div>
+            </td>
+            <td style="padding: 14px 0; font-size: 13px; border-bottom: 1px solid var(--border); text-align: right; color: var(--gold);">$49/mes</td>
+          </tr>
+          <tr class="tool-row">
+            <td style="padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--border);">
+              <div class="tool-name">LinkedIn Sales Navigator</div>
+              <div class="tool-use">Filtros avanzados · decisores logísticos Perú</div>
+            </td>
+            <td style="padding: 14px 0; font-size: 13px; border-bottom: 1px solid var(--border); text-align: right; color: var(--gold);">$99/mes</td>
+          </tr>
+          <tr class="tool-row">
+            <td style="padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--border);">
+              <div class="tool-name">ChatGPT Plus o Claude Pro</div>
+              <div class="tool-use">Redacción · análisis BD · preparación reuniones</div>
+            </td>
+            <td style="padding: 14px 0; font-size: 13px; border-bottom: 1px solid var(--border); text-align: right; color: var(--gold);">$20/mes</td>
+          </tr>
+          <tr class="tool-row">
+            <td style="padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--border);">
+              <div class="tool-name">NeverBounce</div>
+              <div class="tool-use">Validar los 10k correos de la BD antes de campañas</div>
+            </td>
+            <td style="padding: 14px 0; font-size: 13px; border-bottom: 1px solid var(--border); text-align: right; color: var(--gold);">~$80 una vez</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top: 24px; padding: 20px 24px; background: var(--gold-bg); border: 1px solid #2A2008; border-radius: 6px;">
+        <div style="font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px;">Para dimensionar la inversión</div>
+        <div style="font-size: 14px; color: var(--text2); line-height: 1.5;">Una sola cuenta cliente que mueva <strong style="color: var(--text);">S/ 20,000/mes</strong> en facturación, retenida 12 meses, cubre el stack completo del año <strong style="color: var(--text);">más de 10 veces</strong>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S5: ROADMAP ===== -->
+<section class="section" id="s5">
+  <div class="section-tag">04 · Roadmap 90 días</div>
+
+  <h2 class="tesis tesis-lg" style="max-width: 700px;">
+    Del orden<br>al <em>crecimiento</em>.
+  </h2>
+
+  <div class="roadmap-phases">
+    <!-- FASE 1 -->
+    <div class="road-phase">
+      <div class="road-header">
+        <div class="road-tag">Fase 1</div>
+        <div class="road-period">Sem. 1 – 2</div>
+        <div class="road-obj">Dejar de operar a memoria</div>
+      </div>
+      <div class="road-body">
+        <ul class="road-items">
+          <li><strong>HubSpot activo:</strong> pipeline, etiquetas, importar BD</li>
+          <li><strong>BD validada:</strong> limpiar RUCs inactivos, segmentar por industria</li>
+          <li><strong>Google Business</strong> actualizado + primeras reseñas</li>
+          <li><strong>WhatsApp Business</strong> con catálogo y respuestas rápidas</li>
+          <li><strong>Notion:</strong> centralizar tarifas, procesos y playbook de ventas</li>
+          <li>Primer contacto con los 50 mejores prospectos del Tier A</li>
+        </ul>
+        <div class="road-outcome">↑ 0 → Pipeline estructurado con 50+ contactos</div>
+      </div>
+    </div>
+
+    <!-- FASE 2 -->
+    <div class="road-phase" style="border-color: #2A2008;">
+      <div class="road-header" style="border-color: #2A2008;">
+        <div class="road-tag">Fase 2</div>
+        <div class="road-period">Sem. 3 – 6</div>
+        <div class="road-obj">Generar flujo de leads</div>
+      </div>
+      <div class="road-body">
+        <ul class="road-items">
+          <li><strong>Nuevo sitio web</strong> con cotizador, portal cliente y SEO</li>
+          <li><strong>3 lead magnets:</strong> guía tarifas, checklist, calculadora</li>
+          <li>Secuencias email por industria: alimentos · retail · construcción</li>
+          <li>LinkedIn corporativo + perfil personal como referente logístico</li>
+          <li>Blog: 2 artículos/sem. orientados a búsquedas de alta intención</li>
+          <li>Primera campaña de outreach sobre BD Tier B (800 contactos)</li>
+        </ul>
+        <div class="road-outcome" style="color: var(--gold);">↑ Primeros leads orgánicos + 5-10 cuentas pipeline caliente</div>
+      </div>
+    </div>
+
+    <!-- FASE 3 -->
+    <div class="road-phase">
+      <div class="road-header">
+        <div class="road-tag">Fase 3</div>
+        <div class="road-period">Sem. 7 – 12</div>
+        <div class="road-obj">Escalar sin aumentar caos</div>
+      </div>
+      <div class="road-body">
+        <ul class="road-items">
+          <li>Secuencias email automatizadas con Apollo + seguimiento CRM</li>
+          <li><strong>Portal cliente activo</strong> con tracking y documentos (elimina WhatsApp)</li>
+          <li>Dashboard de métricas comerciales: leads, pipeline, conversión</li>
+          <li>Revisión de esquema de comisiones según resultados</li>
+          <li>Apollo.io + Sales Navigator para prospección sistemática</li>
+          <li>Primer informe de ROI: leads / pipeline / cierres / comisiones</li>
+        </ul>
+        <div class="road-outcome">↑ Sistema funcionando · 3-5 cuentas cerradas · métricas claras</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cierre -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; padding-top: 48px; border-top: 1px solid var(--border);">
+    <div>
+      <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-bottom: 20px;">Lo que necesito para empezar</div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--text2);">
+          <span style="color: var(--gold); font-size: 18px;">—</span>
+          Acceso a la base de datos de 10k empresas
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--text2);">
+          <span style="color: var(--gold); font-size: 18px;">—</span>
+          Definir esquema de comisiones (leads propios vs heredados)
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--text2);">
+          <span style="color: var(--gold); font-size: 18px;">—</span>
+          Aprobación para rediseñar el sitio web (presupuesto aparte)
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--text2);">
+          <span style="color: var(--gold); font-size: 18px;">—</span>
+          Presupuesto mensual herramientas: $0 mes 1 → ~$190 mes 3+
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family: 'Fraunces', serif; font-size: 28px; font-weight: 300; line-height: 1.2; margin-bottom: 16px;">
+        El objetivo es claro:<br><em style="color: var(--gold);">cerrar cuentas medianas y grandes</em> que generen comisión recurrente.
+      </div>
+      <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">
+        10 cuentas a S/ 25k/mes de facturación promedio = pipeline de S/ 250k/mes.<br>
+        Eso justifica todo el sistema 30 veces.
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
