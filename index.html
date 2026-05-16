@@ -3,634 +3,447 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jhaz Operador Logístico — Carga formal en Perú con crédito 30 días</title>
-<meta name="description" content="Operador logístico formal en Perú con crédito 30 días, tracking en tiempo real y acceso a todos los almacenes del Callao. Proveedor de Acciona, DP World, Quellaveco y Refinería Talara. Siempre Atentos.">
-<meta name="theme-color" content="#1A365D">
-<meta property="og:title" content="Jhaz Operador Logístico — Siempre Atentos">
-<meta property="og:description" content="Carga formal en Perú con crédito 30 días, tracking GPS, MATPEL y acceso Callao.">
-<meta property="og:type" content="website">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://jhaz.com.pe/#org","name":"Jhaz Operador Logístico S.A.C.","slogan":"Siempre Atentos","url":"https://jhaz.com.pe","telephone":["+51991913935","+51933428035"],"email":["comercial@jhaz.com.pe"],"address":{"@type":"PostalAddress","addressLocality":"San Miguel","addressRegion":"Lima","addressCountry":"PE"},"foundingDate":"2015","vatID":"20600135261"}</script>
-
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<title>Jhaz Operador Logístico — Siempre Atentos</title>
+<meta name="description" content="Operador logístico formal en Perú. Crédito 30 días, tracking GPS, permiso MATPEL y acceso a todos los almacenes del Callao. Proveedor de Acciona, DP World y Mina Quellaveco.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        "navy": "#1A365D",
-        "navy-dark": "#0F2240",
-        "navy-mid": "#234172",
-        "orange": "#F6AD55",
-        "orange-dark": "#E8950A",
-        "orange-hover": "#C97E07",
-        "surface": "#F7FAFC",
-        "surface-100": "#EDF2F7",
-        "border": "#E2E8F0",
-        "gray-text": "#4A5568",
-        "success": "#38A169",
-        "navy-authority": "#1A365D",
-        "action-orange": "#F6AD55"
-      },
-      fontFamily: { sans: ['Inter', 'sans-serif'] },
-      maxWidth: { "container": "1280px" }
-    }
-  }
-}
-</script>
-
+<link rel="stylesheet" href="shared.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Jhaz Operador Logístico S.A.C.","slogan":"Siempre Atentos","url":"https://jhaz.com.pe","telephone":["+51991913935","+51933428035"],"email":"comercial@jhaz.com.pe","address":{"@type":"PostalAddress","addressLocality":"San Miguel","addressRegion":"Lima","addressCountry":"PE"},"foundingDate":"2015","vatID":"20600135261"}</script>
 <style>
-/* Clients carousel */
-.clients-track { animation: slide 30s linear infinite; display: flex; width: max-content; }
-.clients-track:hover { animation-play-state: paused; }
-@keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* ===== INDEX-ONLY STYLES ===== */
+.hero { background:var(--navy-dark); min-height:620px; display:flex; align-items:center; position:relative; overflow:hidden; }
+.hero-bg { position:absolute; inset:0; }
+.hero-bg img { width:100%; height:100%; object-fit:cover; opacity:.25; }
+.hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(105deg,var(--navy-dark) 40%,rgba(15,34,64,.6) 100%); }
+.hero-inner { position:relative; z-index:1; max-width:1280px; margin:0 auto; padding:80px 32px; display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:center; }
+.hero-eye { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--orange); margin-bottom:20px; }
+.hero-eye::before { content:''; width:20px; height:2px; background:var(--orange); }
+.hero h1 { font-size:clamp(36px,4.8vw,58px); font-weight:800; color:#fff; line-height:1.05; letter-spacing:-.025em; margin-bottom:18px; }
+.hero h1 span { color:var(--orange); }
+.hero-sub { font-size:16px; color:rgba(255,255,255,.7); line-height:1.7; max-width:480px; margin-bottom:30px; }
+.hero-btns { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:36px; }
+.hero-trust { display:flex; gap:18px; flex-wrap:wrap; padding-top:24px; border-top:1px solid rgba(255,255,255,.12); }
+.trust-item { display:flex; align-items:center; gap:6px; font-size:11px; color:rgba(255,255,255,.55); font-weight:500; }
+.trust-dot { width:5px; height:5px; background:var(--success); border-radius:999px; flex-shrink:0; }
 
-/* Scroll reveal */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.in { opacity: 1; transform: none; }
+/* Quote card in hero */
+.qcard { background:#fff; border-radius:16px; padding:26px; box-shadow:0 24px 64px rgba(0,0,0,.3); }
+.qcard h3 { font-size:18px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+.qcard p { font-size:12px; color:var(--t400); margin-bottom:18px; }
+.q-field { display:flex; flex-direction:column; gap:4px; margin-bottom:12px; }
+.q-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--t600); }
+.q-select { padding:10px 12px; border:1.5px solid var(--border); border-radius:7px; font-size:13px; font-family:inherit; background:#fff; color:var(--t); -webkit-appearance:none; transition:border-color 150ms; }
+.q-select:focus { outline:none; border-color:var(--navy); }
+.q-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.q-btn { width:100%; padding:13px; background:var(--navy); color:#fff; border:none; border-radius:8px; font-size:14px; font-weight:700; font-family:inherit; cursor:pointer; transition:all 150ms; margin-top:2px; }
+.q-btn:hover { background:var(--navy-mid); }
+.q-result { display:none; margin-top:12px; padding:14px; background:rgba(246,173,85,.1); border:1.5px solid rgba(246,173,85,.35); border-radius:10px; }
+.q-result.show { display:block; animation:fadein .3s ease; }
+@keyframes fadein { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+.q-result-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--orange-dark); margin-bottom:3px; }
+.q-result-val { font-size:22px; font-weight:800; color:var(--navy); }
+.q-result-note { font-size:11px; color:var(--t400); margin-top:5px; line-height:1.5; }
+
+/* Clients band */
+.clients-band { background:var(--navy); padding:32px 0; overflow:hidden; }
+.clients-band-label { text-align:center; font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-bottom:20px; }
+
+/* Services overview */
+.svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.svc-card { padding:28px; }
+.svc-icon { width:48px; height:48px; border-radius:10px; background:var(--surface-100); display:flex; align-items:center; justify-content:center; margin-bottom:16px; color:var(--navy); }
+.svc-icon svg { width:24px; height:24px; }
+.svc-title { font-size:17px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+.svc-desc { font-size:13px; color:var(--t600); line-height:1.6; margin-bottom:14px; }
+.svc-check { display:flex; align-items:center; gap:7px; font-size:12px; color:var(--t600); margin-bottom:5px; }
+.svc-check svg { width:14px; height:14px; color:var(--success); flex-shrink:0; }
+.svc-link { display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:700; color:var(--orange-dark); margin-top:12px; }
+
+/* Bento grid */
+.bento { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.bento-photo { border-radius:14px; overflow:hidden; }
+.bento-photo img { width:100%; height:100%; object-fit:cover; min-height:280px; transition:transform .4s ease; }
+.bento-photo:hover img { transform:scale(1.04); }
+.bento-dark { background:var(--navy); border-radius:14px; padding:28px; position:relative; overflow:hidden; }
+.bento-dark-tag { font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:8px; }
+.bento-dark-title { font-size:20px; font-weight:700; color:#fff; margin-bottom:10px; }
+.bento-dark-desc { font-size:13px; color:rgba(255,255,255,.55); line-height:1.6; }
+.bento-dark-link { display:inline-flex; align-items:center; gap:5px; font-size:13px; font-weight:700; color:var(--orange); margin-top:16px; }
+
+/* Value band */
+.value-band { background:var(--navy); padding:72px 0; }
+.value-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:48px; }
+.value-card { border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:28px; transition:background 200ms; }
+.value-card:hover { background:rgba(255,255,255,.04); }
+.value-icon { width:44px; height:44px; background:rgba(246,173,85,.12); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+.value-icon svg { width:22px; height:22px; color:var(--orange); }
+.value-title { font-size:17px; font-weight:700; color:#fff; margin-bottom:8px; }
+.value-desc { font-size:13px; color:rgba(255,255,255,.55); line-height:1.6; }
+
+/* Process */
+.process-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; position:relative; }
+.process-grid::before { content:''; position:absolute; top:28px; left:10%; right:10%; height:2px; background:var(--border); z-index:0; }
+.process-step { text-align:center; position:relative; z-index:1; }
+.process-num { width:56px; height:56px; border-radius:999px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:13px; font-weight:700; }
+.process-num.done { background:var(--navy); color:#fff; }
+.process-num.active { background:var(--orange); color:var(--navy-dark); }
+.process-num.todo { background:#fff; border:2px solid var(--border); color:var(--t400); }
+.process-step h4 { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+.process-step p { font-size:12px; color:var(--t400); line-height:1.5; }
+
+/* WA CTA box */
+.wa-box { background:var(--navy); border-radius:16px; padding:40px 48px; display:flex; align-items:center; justify-content:space-between; gap:24px; position:relative; overflow:hidden; }
+.wa-box::after { content:''; position:absolute; right:-60px; bottom:-60px; width:200px; height:200px; background:rgba(255,255,255,.03); border-radius:999px; }
+
+/* Projects */
+.proj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.proj-card { border-radius:12px; overflow:hidden; position:relative; aspect-ratio:4/3; display:block; }
+.proj-card img { width:100%; height:100%; object-fit:cover; transition:transform .4s ease; }
+.proj-card:hover img { transform:scale(1.05); }
+.proj-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(15,34,64,.88) 0%,rgba(15,34,64,.1) 65%); }
+.proj-info { position:absolute; bottom:0; left:0; right:0; padding:16px; }
+.proj-tag { font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--orange); margin-bottom:4px; }
+.proj-name { font-size:15px; font-weight:700; color:#fff; }
 
 /* FAQ */
-.faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s ease; }
-.faq-item.open .faq-a { max-height: 300px; }
-.faq-toggle { transition: transform .25s ease; }
-.faq-item.open .faq-toggle { transform: rotate(45deg); }
+.faq-item { border-bottom:1px solid var(--border); }
+.faq-item:first-child { border-top:1px solid var(--border); }
+.faq-q { width:100%; text-align:left; padding:20px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; font-size:15px; font-weight:600; color:var(--navy); cursor:pointer; border:none; background:none; font-family:inherit; transition:color 150ms; }
+.faq-q:hover { color:var(--orange-dark); }
+.faq-plus { font-size:20px; color:var(--t400); flex-shrink:0; transition:transform .25s ease; }
+.faq-item.open .faq-plus { transform:rotate(45deg); color:var(--orange-dark); }
+.faq-a { max-height:0; overflow:hidden; font-size:14px; color:var(--t600); line-height:1.7; transition:max-height .35s ease,padding .3s ease; }
+.faq-item.open .faq-a { max-height:250px; padding-bottom:20px; }
 
-/* Hover cards */
-.service-card { transition: transform .2s ease, box-shadow .2s ease; }
-.service-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
-
-/* Hero quote */
-.qresult { display: none; }
-.qresult.show { display: block; animation: fade .3s ease; }
-@keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-
-/* Process active step */
-.step-active { background: #F6AD55; color: #0F2240; }
-
-@media (prefers-reduced-motion: reduce) {
-  .clients-track { animation: none; }
-  .reveal { opacity: 1; transform: none; }
-}
+@media(max-width:900px){ .hero-inner{grid-template-columns:1fr;gap:32px} .svc-grid{grid-template-columns:1fr} .value-grid{grid-template-columns:1fr} .process-grid{grid-template-columns:1fr 1fr;gap:24px} .process-grid::before{display:none} .proj-grid{grid-template-columns:1fr 1fr} .bento{grid-template-columns:1fr} .wa-box{flex-direction:column;padding:32px} }
 </style>
 </head>
-<body class="bg-surface font-sans text-gray-900 antialiased overflow-x-hidden">
+<body>
 
-<!-- NAV -->
-<header class="bg-white border-b border-border sticky top-0 z-50 shadow-sm">
-  <div class="max-w-container mx-auto px-8 h-[70px] flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-3">
-      <div class="w-9 h-9 bg-navy rounded-lg flex items-center justify-center">
-        <span class="text-orange font-black text-sm">JH</span>
-      </div>
-      <div class="leading-none">
-        <div class="font-bold text-navy text-[17px]">Jhaz</div>
-        <div class="text-[10px] text-gray-text font-medium tracking-wide uppercase">Operador Logístico</div>
-      </div>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-box"><span>JH</span></div>
+      <div class="nav-brand">Jhaz<small>Operador Logístico SAC</small></div>
     </a>
-    <nav class="hidden md:flex items-center gap-1">
-      <a href="servicio-nacional.html" class="px-4 py-2 text-sm text-gray-text hover:text-navy font-medium rounded-lg hover:bg-surface-100 transition-all">Servicios</a>
-      <a href="credito.html" class="px-4 py-2 text-sm text-gray-text hover:text-navy font-medium rounded-lg hover:bg-surface-100 transition-all">Crédito 30 días</a>
-      <a href="#proyectos" class="px-4 py-2 text-sm text-gray-text hover:text-navy font-medium rounded-lg hover:bg-surface-100 transition-all">Proyectos</a>
-      <a href="blog.html" class="px-4 py-2 text-sm text-gray-text hover:text-navy font-medium rounded-lg hover:bg-surface-100 transition-all">Recursos</a>
-      <a href="#contacto" class="px-4 py-2 text-sm text-gray-text hover:text-navy font-medium rounded-lg hover:bg-surface-100 transition-all">Contacto</a>
-      <a href="portal.html" class="px-4 py-2 text-xs text-gray-400 hover:text-gray-text font-medium transition-colors">Mi Jhaz</a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link active">Inicio</a>
+      <a href="servicios.html" class="nav-link">Servicios</a>
+      <a href="nosotros.html" class="nav-link">Nosotros</a>
+      <a href="contacto.html" class="nav-link">Contacto</a>
     </nav>
-    <a href="#cotizar" class="bg-orange text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-orange-hover active:scale-95 transition-all shadow-sm">
-      Cotizar envío →
-    </a>
+    <a href="contacto.html" class="nav-cta">Solicitar Cotización</a>
   </div>
 </header>
 
 <main>
-<!-- ======= HERO ======= -->
-<section class="relative min-h-[640px] flex items-center overflow-hidden bg-navy-dark">
-  <div class="absolute inset-0">
-    <img src="carga01.png" alt="Flota Jhaz" class="w-full h-full object-cover object-center opacity-30">
-    <div class="absolute inset-0 bg-gradient-to-r from-navy-dark via-navy-dark/80 to-navy/50"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="carga01.png" alt="Flota Jhaz">
   </div>
-  
-  <div class="relative z-10 max-w-container mx-auto px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-    <!-- Left -->
+  <div class="hero-inner">
     <div>
-      <div class="flex items-center gap-3 text-orange text-xs font-bold tracking-widest uppercase mb-6">
-        <span class="w-8 h-0.5 bg-orange"></span>
-        Siempre Atentos · Lima, Perú
+      <div class="hero-eye">Siempre Atentos · Lima, Perú</div>
+      <h1>Jhaz Operador Logístico:<br><span>Conectando tu carga</span><br>con el mundo</h1>
+      <p class="hero-sub">Transporte de carga variada local, nacional e internacional. Garantizamos que cada envío llegue a su destino con los más altos estándares de formalidad y seguridad.</p>
+      <div class="hero-btns">
+        <a href="contacto.html" class="btn btn-orange">Solicitar Cotización →</a>
+        <a href="servicios.html" class="btn" style="border:2px solid rgba(255,255,255,.35);color:#fff">Ver Servicios</a>
       </div>
-      <h1 class="text-5xl lg:text-6xl font-extrabold text-white leading-[1.04] tracking-tight mb-6">
-        Jhaz Operador<br>Logístico:<br>
-        <span class="text-orange">Conectando tu carga</span><br>con el mundo
-      </h1>
-      <p class="text-lg text-white/70 leading-relaxed mb-8 max-w-lg">
-        10 años moviendo carga para Acciona, DP World y los principales proyectos mineros del Perú. Crédito 30 días, tracking GPS y permiso MATPEL en toda la operación.
-      </p>
-      <div class="flex gap-4 flex-wrap mb-10">
-        <a href="#cotizar" class="bg-orange text-white px-8 py-4 rounded-xl font-bold text-base hover:bg-orange-hover active:scale-95 transition-all shadow-lg flex items-center gap-2">
-          Cotizar ahora →
-        </a>
-        <a href="credito.html" class="border-2 border-white/40 text-white px-7 py-4 rounded-xl font-semibold text-base hover:border-white hover:bg-white/8 active:scale-95 transition-all">
-          Crédito 30 días
-        </a>
-      </div>
-      <div class="flex flex-wrap gap-5 pt-6 border-t border-white/15">
-        <div class="flex items-center gap-2 text-xs text-white/60 font-medium">
-          <span class="w-1.5 h-1.5 bg-success rounded-full"></span>RNP · Proveedor del Estado
-        </div>
-        <div class="flex items-center gap-2 text-xs text-white/60 font-medium">
-          <span class="w-1.5 h-1.5 bg-success rounded-full"></span>Permiso MATPEL vigente
-        </div>
-        <div class="flex items-center gap-2 text-xs text-white/60 font-medium">
-          <span class="w-1.5 h-1.5 bg-success rounded-full"></span>Acceso almacenes Callao
-        </div>
+      <div class="hero-trust">
+        <div class="trust-item"><span class="trust-dot"></span>RNP · Proveedor del Estado</div>
+        <div class="trust-item"><span class="trust-dot"></span>Permiso MATPEL vigente</div>
+        <div class="trust-item"><span class="trust-dot"></span>Acceso almacenes Callao</div>
+        <div class="trust-item"><span class="trust-dot"></span>SUNAT Importador/Exportador</div>
       </div>
     </div>
 
-    <!-- Right: Cotizador -->
-    <div class="bg-white rounded-2xl p-7 shadow-2xl" id="cotizar">
-      <h3 class="text-navy font-bold text-xl mb-1">Cotiza en 60 segundos</h3>
-      <p class="text-gray-text text-sm mb-5">Rango estimado al instante · Cotización formal en 4 horas</p>
-      <form id="qf" class="space-y-3">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-widest text-gray-text mb-1.5">Origen</label>
-          <select id="qo" required class="w-full px-3 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy bg-white">
+    <!-- Cotizador rápido -->
+    <div class="qcard">
+      <h3>Estima tu envío</h3>
+      <p>Rango referencial al instante · Cotización formal en 4 horas</p>
+      <form id="qf">
+        <div class="q-field"><label class="q-label">Origen</label>
+          <select class="q-select" id="qo" required>
             <option value="">Ciudad de origen</option>
             <option>Lima</option><option>Callao</option><option>Arequipa</option><option>Trujillo</option><option>Piura</option><option>Cusco</option>
           </select>
         </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-widest text-gray-text mb-1.5">Destino</label>
-          <select id="qd" required class="w-full px-3 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy bg-white">
+        <div class="q-field"><label class="q-label">Destino</label>
+          <select class="q-select" id="qd" required>
             <option value="">Ciudad de destino</option>
             <option>Lima</option><option>Callao</option><option>Arequipa</option><option>Trujillo</option><option>Piura</option><option>Cusco</option><option>Bolivia</option>
           </select>
         </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-widest text-gray-text mb-1.5">Tipo de carga</label>
-            <select id="qt" required class="w-full px-3 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:border-navy bg-white">
-              <option value="">Selecciona</option>
-              <option>General / paletizada</option><option>MATPEL</option><option>Sobredimensionada</option><option>Contenedor</option>
+        <div class="q-row">
+          <div class="q-field"><label class="q-label">Tipo</label>
+            <select class="q-select" id="qt" required>
+              <option value="">Carga</option><option>General</option><option>MATPEL</option><option>Sobredimensionada</option><option>Contenedor</option>
             </select>
           </div>
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-widest text-gray-text mb-1.5">Volumen</label>
-            <select id="qv" required class="w-full px-3 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:border-navy bg-white">
-              <option value="">Toneladas</option>
-              <option>Menos de 1t</option><option>1 a 5t</option><option>5 a 15t</option><option>Más de 15t</option>
+          <div class="q-field"><label class="q-label">Volumen</label>
+            <select class="q-select" id="qv" required>
+              <option value="">Toneladas</option><option>Menos de 1t</option><option>1 a 5t</option><option>5 a 15t</option><option>Más de 15t</option>
             </select>
           </div>
         </div>
-        <button type="submit" class="w-full bg-navy text-white py-3.5 rounded-xl font-bold text-sm hover:bg-navy-mid active:scale-98 transition-all flex items-center justify-center gap-2">
-          Ver estimación →
-        </button>
+        <button type="submit" class="q-btn">Ver estimación →</button>
       </form>
-      <div class="qresult mt-4 p-4 bg-orange/10 border border-orange/30 rounded-xl" id="qr">
-        <div class="text-xs font-bold uppercase tracking-widest text-orange-dark mb-1">Rango estimado</div>
-        <div class="text-2xl font-extrabold text-navy" id="qrv">—</div>
-        <div class="text-xs text-gray-text mt-1.5 leading-relaxed">Cotización formal en 4h horas · Factura, seguro y tracking incluidos</div>
+      <div class="q-result" id="qr">
+        <div class="q-result-label">Estimación referencial</div>
+        <div class="q-result-val" id="qrv">—</div>
+        <div class="q-result-note">Para cotización formal con datos exactos → <a href="contacto.html" style="color:var(--orange-dark);font-weight:600">Solicitar Cotización</a></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======= CLIENTS CAROUSEL ======= -->
-<section class="bg-navy py-9 overflow-hidden">
-  <div class="text-center text-xs font-bold tracking-widest uppercase text-white/40 mb-5">Empresas que confían en Jhaz</div>
-  <div class="overflow-hidden">
+<!-- CLIENTS -->
+<div class="clients-band">
+  <div class="clients-band-label">Empresas que confían en Jhaz</div>
+  <div class="clients-wrap">
     <div class="clients-track">
-      <div class="flex items-center">
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/acciona.png" alt="Acciona" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/dpworld.png" alt="DP World" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/cumbra.png" alt="Cumbra" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/cempro.png" alt="Cempro" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/esco.png" alt="ESCO" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/flanders.png" alt="Flanders" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/Omni-Logistics.png" alt="Omni Logistics" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/wiclogistics.png" alt="Wic Logistics" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/IPH-GRUPO-LOGISTICO.png" alt="IPH Grupo" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/traffictech.png" alt="Traffictech" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/fulter.png" alt="Fulter" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
-        <div class="px-8"><img src="https://jhaz.com.pe/logos/lahanseatica.png" alt="Lahanseatica" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"></div>
+      <div style="display:flex;align-items:center">
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/acciona.png" alt="Acciona" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/dpworld.png" alt="DP World" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/cumbra.png" alt="Cumbra" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/cempro.png" alt="Cempro" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/esco.png" alt="ESCO" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/flanders.png" alt="Flanders" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/Omni-Logistics.png" alt="Omni Logistics" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/wiclogistics.png" alt="Wic Logistics" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/IPH-GRUPO-LOGISTICO.png" alt="IPH Grupo" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/traffictech.png" alt="Traffictech" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/fulter.png" alt="Fulter" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/lahanseatica.png" alt="Lahanseatica" class="client-logo"></div>
       </div>
-      <!-- Duplicate for infinite loop -->
-      <div class="flex items-center">
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/acciona.png" alt="Acciona" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/dpworld.png" alt="DP World" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/cumbra.png" alt="Cumbra" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/cempro.png" alt="Cempro" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/esco.png" alt="ESCO" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/flanders.png" alt="Flanders" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/Omni-Logistics.png" alt="Omni Logistics" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/wiclogistics.png" alt="Wic Logistics" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/IPH-GRUPO-LOGISTICO.png" alt="IPH Grupo" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/traffictech.png" alt="Traffictech" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8 border-r border-white/10"><img src="https://jhaz.com.pe/logos/fulter.png" alt="Fulter" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
-        <div class="px-8"><img src="https://jhaz.com.pe/logos/lahanseatica.png" alt="Lahanseatica" class="h-9 max-w-[110px] object-contain brightness-0 invert opacity-60"></div>
+      <!-- Duplicado para loop infinito -->
+      <div style="display:flex;align-items:center">
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/acciona.png" alt="Acciona" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/dpworld.png" alt="DP World" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/cumbra.png" alt="Cumbra" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/cempro.png" alt="Cempro" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/esco.png" alt="ESCO" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/flanders.png" alt="Flanders" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/Omni-Logistics.png" alt="Omni Logistics" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/wiclogistics.png" alt="Wic Logistics" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/IPH-GRUPO-LOGISTICO.png" alt="IPH Grupo" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/traffictech.png" alt="Traffictech" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/fulter.png" alt="Fulter" class="client-logo"></div>
+        <div class="client-item"><img src="https://jhaz.com.pe/logos/lahanseatica.png" alt="Lahanseatica" class="client-logo"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES OVERVIEW (resumen, detalle en servicios.html) -->
+<section class="section" style="background:var(--surface-100)">
+  <div class="container">
+    <div class="section-tag">Especialización</div>
+    <h2 class="section-title">Servicios que Impulsan su Negocio</h2>
+    <p class="section-sub" style="margin-bottom:40px">Soluciones logísticas integrales para operaciones locales, nacionales e internacionales — incluyendo carga especial y proyectos de gran escala.</p>
+
+    <div class="bento" style="margin-bottom:16px">
+      <div class="card" style="padding:28px">
+        <div class="svc-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25"/></svg></div>
+        <div class="svc-title">Carga Nacional</div>
+        <div class="svc-desc">Furgones 1-30t, plataformas, cama bajas y cama cunas para todo el Perú. Monitoreo GPS constante y entrega puerta a puerta.</div>
+        <div class="svc-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Cobertura a las 24 regiones</div>
+        <div class="svc-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Monitoreo GPS 24/7</div>
+        <div class="svc-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Seguro de carga incluido</div>
+        <a href="servicios.html" class="svc-link">Ver detalles →</a>
+      </div>
+      <div class="bento-photo">
+        <img src="carga03.png" alt="Transporte nacional de carga">
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="bento-dark rev">
+        <div class="bento-dark-tag">Logística Global</div>
+        <div class="bento-dark-title">Carga Internacional</div>
+        <div class="bento-dark-desc">Exportación e importación con coordinación aduanera. Bolivia, Chile y LATAM. Acceso a todos los almacenes del Callao para operaciones portuarias.</div>
+        <a href="servicios.html" class="bento-dark-link">Más información →</a>
+        <div style="position:absolute;right:-20px;bottom:-20px;opacity:.07">
+          <svg width="140" height="140" fill="white" viewBox="0 0 24 24"><path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918"/></svg>
+        </div>
+      </div>
+      <div class="card rev" style="padding:0;overflow:hidden">
+        <img src="carga06.png" alt="Carga especial y pesada" style="width:100%;height:220px;object-fit:cover">
+        <div style="padding:20px">
+          <div class="svc-title" style="font-size:15px">Carga Especial y Pesada</div>
+          <div class="svc-desc">Cama bajas, plataformas y modulares para maquinaria minera y proyectos industriales. Con escolta cuando se requiere.</div>
+          <div style="font-size:11px;font-weight:700;color:var(--orange-dark);text-transform:uppercase;letter-spacing:.1em">Acceso habilitado a minas y proyectos</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:28px">
+      <a href="servicios.html" class="btn btn-navy">Ver todos los servicios →</a>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE BAND -->
+<section class="value-band">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag" style="justify-content:center">El valor de elegir Jhaz</div>
+      <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.1;margin-top:4px">Más de 10 años garantizando<br>puntualidad y seguridad en cada kilómetro.</h2>
+    </div>
+    <div class="value-grid">
+      <div class="value-card rev">
+        <div class="value-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg></div>
+        <div class="value-title">Crédito 30 días</div>
+        <div class="value-desc">Línea de crédito empresarial sin garantías personales. Aprobación en 72 horas con documentación estándar. Consolida todos los envíos del mes en una sola factura.</div>
+      </div>
+      <div class="value-card rev">
+        <div class="value-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg></div>
+        <div class="value-title">Formalidad Completa</div>
+        <div class="value-desc">Factura electrónica, SCTR vigente, seguro de carga, RNP activo, permiso MATPEL y acceso al Callao. Sin sorpresas con SUNAT ni con tu cliente.</div>
+      </div>
+      <div class="value-card rev">
+        <div class="value-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg></div>
+        <div class="value-title">Tracking en Tiempo Real</div>
+        <div class="value-desc">GPS y monitoreo constante en todas las unidades. Flota disponible 24/7, 365 días. Tu cliente sabe dónde está su carga en todo momento.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======= SERVICES BENTO GRID ======= -->
-<section class="py-20 px-8 max-w-container mx-auto">
-  <div class="mb-4">
-    <span class="text-orange text-xs font-bold tracking-widest uppercase">Soluciones logísticas integrales</span>
-  </div>
-  <div class="w-16 h-0.5 bg-orange mb-10"></div>
-
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
-    <!-- Card 1: Carga Nacional -->
-    <div class="md:col-span-4 service-card bg-white rounded-2xl border border-border p-7 flex flex-col reveal">
-      <div class="w-12 h-12 bg-surface-100 rounded-xl flex items-center justify-center mb-5">
-        <svg class="w-6 h-6 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25"/></svg>
-      </div>
-      <h3 class="text-navy font-bold text-xl mb-3">Carga Nacional</h3>
-      <p class="text-gray-text text-sm leading-relaxed mb-5">Cobertura en todo el Perú con furgones (1-30t), plataformas, cama bajas y escolta. Entrega puerta a puerta con factura electrónica.</p>
-      <div class="space-y-2 mb-6">
-        <div class="flex items-center gap-2 text-sm text-gray-text">
-          <svg class="w-4 h-4 text-success flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-          Monitoreo GPS 24/7
-        </div>
-        <div class="flex items-center gap-2 text-sm text-gray-text">
-          <svg class="w-4 h-4 text-success flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-          Seguros de carga premium
-        </div>
-        <div class="flex items-center gap-2 text-sm text-gray-text">
-          <svg class="w-4 h-4 text-success flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-          Permiso MATPEL incluido
-        </div>
-      </div>
-      <a href="servicio-nacional.html" class="mt-auto bg-navy text-white text-sm font-semibold px-5 py-3 rounded-xl hover:bg-navy-mid transition-colors text-center flex items-center justify-center gap-2">
-        Solicitar Cotización →
-      </a>
+<!-- PROCESS + WA CTA -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px">
+      <h2 class="section-title" style="text-align:center">Su carga en manos expertas</h2>
+      <p style="color:var(--t400);font-size:14px">Nuestro flujo de trabajo optimizado paso a paso</p>
     </div>
-
-    <!-- Center photo -->
-    <div class="md:col-span-4 rounded-2xl overflow-hidden reveal min-h-[320px]">
-      <img src="carga03.png" alt="Transporte de carga nacional" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-    </div>
-
-    <!-- Card 2: Internacional (dark) -->
-    <div class="md:col-span-4 service-card bg-navy rounded-2xl p-7 flex flex-col relative overflow-hidden reveal">
-      <div class="relative z-10">
-        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-5">
-          <svg class="w-6 h-6 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918"/></svg>
-        </div>
-        <h3 class="text-white font-bold text-xl mb-3">Carga Internacional</h3>
-        <p class="text-white/60 text-sm leading-relaxed mb-8">Exportación e importación con coordinación aduanera integral. Bolivia, Chile y LATAM. Consolidación FCL/LCL y transporte multimodal.</p>
-        <div class="pt-6 border-t border-white/10">
-          <span class="text-xs font-bold uppercase tracking-widest text-white/40">Logística Global</span>
-          <a href="servicio-nacional.html" class="mt-3 flex items-center gap-2 text-orange font-semibold text-sm hover:gap-4 transition-all">
-            Más información →
-          </a>
-        </div>
+    <div class="process-grid" style="margin-bottom:40px">
+      <div class="process-step rev">
+        <div class="process-num done"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15"/></svg></div>
+        <h4>Cotización</h4><p>Evaluamos tu carga y brindamos la mejor tarifa</p>
       </div>
-      <div class="absolute -bottom-10 -right-10 opacity-10">
-        <svg class="w-48 h-48 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918"/></svg>
+      <div class="process-step rev">
+        <div class="process-num done"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25"/></svg></div>
+        <h4>Recojo</h4><p>Recolectamos tu mercadería con puntualidad</p>
+      </div>
+      <div class="process-step rev">
+        <div class="process-num active"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg></div>
+        <h4>Tránsito</h4><p>Monitoreo GPS activo durante todo el trayecto</p>
+      </div>
+      <div class="process-step rev">
+        <div class="process-num todo"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <h4>Entrega</h4><p>Entrega confirmada, documentada y facturada</p>
       </div>
     </div>
 
-    <!-- Card 3: Carga Especial -->
-    <div class="md:col-span-4 service-card bg-white rounded-2xl border border-border overflow-hidden reveal">
-      <img src="carga06.png" alt="Carga especial y cama baja" class="w-full h-48 object-cover">
-      <div class="p-6">
-        <h3 class="text-navy font-bold text-lg mb-2">Carga Especial y Pesada</h3>
-        <p class="text-gray-text text-sm leading-relaxed mb-3">Plataformas, cama bajas y modulares para maquinaria, equipos de minería y proyectos de gran escala.</p>
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-orange uppercase tracking-wide">Acceso a minas y proyectos</span>
-        </div>
+    <div class="wa-box">
+      <div style="position:relative;z-index:1">
+        <p style="color:rgba(255,255,255,.6);font-size:13px;margin-bottom:6px">¿Listo para mover tu carga?</p>
+        <p style="color:#fff;font-size:17px;font-weight:600;max-width:400px">Obtén una cotización en menos de 4 horas a través de nuestros canales de atención prioritaria.</p>
       </div>
-    </div>
-
-    <!-- Card 4: Callao / Importación -->
-    <div class="md:col-span-4 service-card bg-white rounded-2xl border border-border overflow-hidden reveal">
-      <img src="carga02.png" alt="Puerto del Callao" class="w-full h-48 object-cover">
-      <div class="p-6">
-        <h3 class="text-navy font-bold text-lg mb-2">Callao · Importación</h3>
-        <p class="text-gray-text text-sm leading-relaxed mb-3">Acceso a todos los almacenes del puerto del Callao. Coordinación directa sin intermediarios adicionales.</p>
-        <div class="flex items-center gap-2 text-xs font-bold text-success">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-          Permiso de acceso vigente
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 5: Stats -->
-    <div class="md:col-span-4 service-card bg-surface-100 rounded-2xl p-7 flex flex-col justify-center reveal">
-      <h3 class="text-navy font-bold text-lg mb-5">Centros de operación directa</h3>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="bg-white rounded-xl p-4 text-center shadow-sm">
-          <div class="text-4xl font-extrabold text-navy tracking-tight">10<span class="text-orange text-2xl">+</span></div>
-          <div class="text-xs text-gray-text uppercase tracking-wide font-semibold mt-1">Años</div>
-        </div>
-        <div class="bg-white rounded-xl p-4 text-center shadow-sm">
-          <div class="text-4xl font-extrabold text-orange tracking-tight">12<span class="text-navy text-2xl">+</span></div>
-          <div class="text-xs text-gray-text uppercase tracking-wide font-semibold mt-1">Clientes</div>
-        </div>
-        <div class="bg-white rounded-xl p-4 text-center shadow-sm">
-          <div class="text-3xl font-extrabold text-navy tracking-tight">24/7</div>
-          <div class="text-xs text-gray-text uppercase tracking-wide font-semibold mt-1">Flota GPS</div>
-        </div>
-        <div class="bg-white rounded-xl p-4 text-center shadow-sm">
-          <div class="text-3xl font-extrabold text-navy tracking-tight">100<span class="text-orange">%</span></div>
-          <div class="text-xs text-gray-text uppercase tracking-wide font-semibold mt-1">Factura-e</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======= VALOR DE ELEGIR JHAZ (dark navy) ======= -->
-<section class="bg-navy py-20 px-8">
-  <div class="max-w-container mx-auto">
-    <div class="text-center mb-14">
-      <span class="text-orange text-xs font-bold tracking-widest uppercase">Trayectoria impecable</span>
-      <h2 class="text-4xl font-extrabold text-white mt-3 leading-tight max-w-3xl mx-auto">
-        Más de 10 años garantizando puntualidad y seguridad en cada kilómetro.
-      </h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      <div class="service-card border border-white/10 rounded-2xl p-8 hover:bg-white/5 transition-colors reveal">
-        <div class="w-12 h-12 rounded-xl bg-orange/15 flex items-center justify-center mb-5">
-          <svg class="w-6 h-6 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
-        </div>
-        <h3 class="text-white font-bold text-xl mb-3">Crédito 30 días</h3>
-        <p class="text-white/60 text-sm leading-relaxed">Línea de crédito empresarial sin garantías personales. Aprobación en 72 horas. La única ventaja que la competencia no puede copiar fácilmente.</p>
-      </div>
-      <div class="service-card border border-white/10 rounded-2xl p-8 hover:bg-white/5 transition-colors reveal">
-        <div class="w-12 h-12 rounded-xl bg-orange/15 flex items-center justify-center mb-5">
-          <svg class="w-6 h-6 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
-        </div>
-        <h3 class="text-white font-bold text-xl mb-3">Tecnología de Rastreo</h3>
-        <p class="text-white/60 text-sm leading-relaxed">Visibilidad total. Tracking GPS activo desde el primer kilómetro. Tu cliente también sabe dónde está su carga desde el portal web.</p>
-      </div>
-      <div class="service-card border border-white/10 rounded-2xl p-8 hover:bg-white/5 transition-colors reveal">
-        <div class="w-12 h-12 rounded-xl bg-orange/15 flex items-center justify-center mb-5">
-          <svg class="w-6 h-6 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-        </div>
-        <h3 class="text-white font-bold text-xl mb-3">Formalidad Certificada</h3>
-        <p class="text-white/60 text-sm leading-relaxed">Factura electrónica, SCTR vigente, seguro de carga, RNP activo, MATPEL y acceso a todos los almacenes del Callao. Sin sorpresas con SUNAT.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======= PROCESS ======= -->
-<section class="py-20 px-8 bg-surface-100">
-  <div class="max-w-container mx-auto">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-extrabold text-navy">Su carga en manos expertas</h2>
-      <p class="text-gray-text mt-2">Nuestro flujo de trabajo optimizado paso a paso</p>
-    </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-      <div class="text-center reveal">
-        <div class="w-14 h-14 bg-navy rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z"/></svg>
-        </div>
-        <h4 class="font-bold text-navy text-base">Cotización</h4>
-        <p class="text-gray-text text-xs mt-1">Evaluamos tu carga y brindamos la mejor tarifa en 4 horas.</p>
-      </div>
-      <div class="text-center reveal">
-        <div class="w-14 h-14 bg-navy rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414A1 1 0 0121 11.414V16a1 1 0 01-1 1h-1"/></svg>
-        </div>
-        <h4 class="font-bold text-navy text-base">Recojo</h4>
-        <p class="text-gray-text text-xs mt-1">Recolectamos tu mercadería con puntualidad en tu almacén.</p>
-      </div>
-      <div class="text-center reveal">
-        <div class="step-active w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
-        </div>
-        <h4 class="font-bold text-navy text-base">Tránsito</h4>
-        <p class="text-gray-text text-xs mt-1">Monitoreo GPS activo durante todo el trayecto.</p>
-      </div>
-      <div class="text-center reveal">
-        <div class="w-14 h-14 bg-surface-100 border-2 border-border rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-6 h-6 text-gray-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
-        <h4 class="font-bold text-navy text-base">Entrega</h4>
-        <p class="text-gray-text text-xs mt-1">Entrega final confirmada, documentada y facturada.</p>
-      </div>
-    </div>
-
-    <!-- WhatsApp CTA box -->
-    <div class="bg-navy rounded-2xl p-10 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-      <div class="relative z-10">
-        <p class="text-white/60 text-sm mb-1">¿Listo para mover tu carga?</p>
-        <p class="text-white font-semibold">Obtén una cotización personalizada en menos de 4 horas a través de nuestros canales de atención.</p>
-      </div>
-      <div class="relative z-10 flex gap-3 flex-shrink-0">
-        <a href="https://wa.me/+51991913935?text=Hola%20Jhaz%2C%20quisiera%20una%20cotizaci%C3%B3n" target="_blank" class="bg-[#25D366] text-white px-6 py-3.5 rounded-full font-bold text-sm flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.435 5.632 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <div style="position:relative;z-index:1;display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap">
+        <a href="https://wa.me/+51991913935?text=Hola%20Jhaz%2C%20quisiera%20una%20cotizaci%C3%B3n" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:13px 22px;border-radius:999px;font-size:14px;font-weight:700;transition:opacity 150ms" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
+          <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.435 5.632 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Cotizar por WhatsApp
         </a>
-        <a href="#cotizar" class="border border-white/30 text-white px-5 py-3.5 rounded-full font-semibold text-sm hover:bg-white/10 active:scale-95 transition-all">
-          Cotizador web →
-        </a>
-      </div>
-      <div class="absolute right-0 bottom-0 opacity-10">
-        <svg class="w-40 h-40 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25"/></svg>
+        <a href="contacto.html" class="btn" style="border:1px solid rgba(255,255,255,.25);color:#fff">Formulario web →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======= PROYECTOS ======= -->
-<section class="py-20 px-8 max-w-container mx-auto" id="proyectos">
-  <div class="mb-2">
-    <span class="text-orange text-xs font-bold tracking-widest uppercase">Principales proyectos</span>
-  </div>
-  <h2 class="text-3xl font-extrabold text-navy mb-3">Donde la logística realmente importa.</h2>
-  <p class="text-gray-text mb-10 max-w-xl">Minería, energía e industria pesada. Los proyectos más exigentes del Perú y Bolivia ya confían en Jhaz.</p>
-
-  <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-    <a href="servicio-nacional.html" class="service-card rounded-2xl overflow-hidden relative aspect-[4/3] block reveal">
-      <img src="https://jhaz.com.pe/proyectos/mina_quellaveco.webp" alt="Mina Quellaveco" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy-dark/20 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 p-4">
-        <div class="text-orange text-[10px] font-bold uppercase tracking-widest mb-1">Nacional · Anglo American</div>
-        <div class="text-white font-bold text-sm">Mina Quellaveco</div>
-      </div>
-    </a>
-    <a href="servicio-nacional.html" class="service-card rounded-2xl overflow-hidden relative aspect-[4/3] block reveal">
-      <img src="https://jhaz.com.pe/proyectos/mina_antapaccay.webp" alt="Mina Antapaccay" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy-dark/20 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 p-4">
-        <div class="text-orange text-[10px] font-bold uppercase tracking-widest mb-1">Nacional · Cobre · Cusco</div>
-        <div class="text-white font-bold text-sm">Mina Antapaccay</div>
-      </div>
-    </a>
-    <a href="servicio-nacional.html" class="service-card rounded-2xl overflow-hidden relative aspect-[4/3] block reveal">
-      <img src="https://jhaz.com.pe/proyectos/refineria_talara.webp" alt="Refinería Talara" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy-dark/20 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 p-4">
-        <div class="text-orange text-[10px] font-bold uppercase tracking-widest mb-1">Nacional · Petroquímica</div>
-        <div class="text-white font-bold text-sm">Refinería Talara</div>
-      </div>
-    </a>
-    <a href="servicio-nacional.html" class="service-card rounded-2xl overflow-hidden relative aspect-[4/3] block reveal">
-      <img src="https://jhaz.com.pe/proyectos/proyecto_punta_lomitas.webp" alt="Punta Lomitas" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy-dark/20 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 p-4">
-        <div class="text-orange text-[10px] font-bold uppercase tracking-widest mb-1">Nacional · Acciona · Energía</div>
-        <div class="text-white font-bold text-sm">Proyecto Punta Lomitas</div>
-      </div>
-    </a>
-    <a href="servicio-nacional.html" class="service-card rounded-2xl overflow-hidden relative aspect-[4/3] block reveal">
-      <img src="https://jhaz.com.pe/proyectos/cementera_potosi.webp" alt="Cementera Potosí" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy-dark/20 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 p-4">
-        <div class="text-orange text-[10px] font-bold uppercase tracking-widest mb-1">Internacional · Bolivia</div>
-        <div class="text-white font-bold text-sm">Cementera Potosí</div>
-      </div>
-    </a>
-    <a href="servicio-nacional.html" class="service-card rounded-2xl overflow-hidden relative aspect-[4/3] block reveal">
-      <img src="https://jhaz.com.pe/proyectos/Importación_de_contenedores.webp" alt="Importación Contenedores" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy-dark/20 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 p-4">
-        <div class="text-orange text-[10px] font-bold uppercase tracking-widest mb-1">Callao · Portuario</div>
-        <div class="text-white font-bold text-sm">Importación de Contenedores</div>
-      </div>
-    </a>
-  </div>
-</section>
-
-<!-- ======= CTA FINAL (Sé parte de la red) ======= -->
-<section class="bg-navy py-20 px-8 relative overflow-hidden">
-  <div class="absolute -right-20 -top-20 w-80 h-80 bg-orange/5 rounded-full"></div>
-  <div class="max-w-container mx-auto text-center relative z-10">
-    <h2 class="text-4xl font-extrabold text-white mb-4">Sé parte de nuestra red logística</h2>
-    <p class="text-white/60 mb-8 max-w-xl mx-auto">¿Buscas optimizar tus operaciones? Conversa con un experto hoy mismo y descubre cómo podemos potenciar tu negocio.</p>
-    <a href="https://wa.me/+51991913935?text=Hola%20Jhaz%2C%20quisiera%20una%20cotizaci%C3%B3n" target="_blank" class="inline-flex items-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-full font-bold text-base hover:opacity-90 active:scale-95 transition-all shadow-xl">
-      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.435 5.632 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Contactar por WhatsApp
-    </a>
-  </div>
-</section>
-
-<!-- ======= FAQ ======= -->
-<section class="py-20 px-8 bg-surface-100">
-  <div class="max-w-container mx-auto max-w-3xl">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-extrabold text-navy">Preguntas Frecuentes</h2>
-      <p class="text-gray-text mt-2">Respuestas rápidas a las consultas más comunes</p>
+<!-- PROYECTOS -->
+<section class="section" id="proyectos" style="background:var(--surface-100)">
+  <div class="container">
+    <div class="section-tag">Principales proyectos</div>
+    <h2 class="section-title">Donde la logística<br>realmente importa.</h2>
+    <p class="section-sub" style="margin-bottom:36px">Minería, energía e industria pesada. Los proyectos más exigentes del Perú y Bolivia confían en Jhaz.</p>
+    <div class="proj-grid">
+      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/mina_quellaveco.webp" alt="Mina Quellaveco"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Nacional · Anglo American</div><div class="proj-name">Mina Quellaveco</div></div></a>
+      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/mina_antapaccay.webp" alt="Mina Antapaccay"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Nacional · Cobre · Cusco</div><div class="proj-name">Mina Antapaccay</div></div></a>
+      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/refineria_talara.webp" alt="Refinería Talara"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Nacional · Petroquímica · Piura</div><div class="proj-name">Refinería Talara</div></div></a>
+      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/proyecto_punta_lomitas.webp" alt="Punta Lomitas"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Nacional · Acciona · Energía eólica</div><div class="proj-name">Proyecto Punta Lomitas</div></div></a>
+      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/cementera_potosi.webp" alt="Cementera Potosí"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Internacional · Bolivia</div><div class="proj-name">Cementera Potosí</div></div></a>
+      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/Importación_de_contenedores.webp" alt="Importación Contenedores"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Callao · Logística portuaria</div><div class="proj-name">Importación de Contenedores</div></div></a>
     </div>
-    <div class="space-y-3">
-      <div class="faq-item bg-white rounded-xl border border-border overflow-hidden">
-        <button class="faq-q w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-orange transition-colors">
-          <span>¿Qué incluye el servicio de transporte de Jhaz?</span>
-          <span class="faq-toggle text-gray-text flex-shrink-0 text-xl font-normal">+</span>
-        </button>
-        <div class="faq-a px-6 pb-5 text-gray-text text-sm leading-relaxed">Recojo en almacén, transporte con GPS, seguro de carga, factura electrónica, guía de remisión y acta de entrega digital. Para clientes con línea de crédito, el pago se consolida a 30 días en una sola factura.</div>
-      </div>
-      <div class="faq-item bg-white rounded-xl border border-border overflow-hidden">
-        <button class="faq-q w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-orange transition-colors">
-          <span>¿Cómo funciona el crédito a 30 días?</span>
-          <span class="faq-toggle text-gray-text flex-shrink-0 text-xl font-normal">+</span>
-        </button>
-        <div class="faq-a px-6 pb-5 text-gray-text text-sm leading-relaxed">Presentás ficha RUC, vigencia de poder, DNI del representante y dos referencias comerciales. En 72 horas aprobamos la línea. Todos los envíos del mes se consolidan en una sola factura con vencimiento a 30 días. Sin garantías personales.</div>
-      </div>
-      <div class="faq-item bg-white rounded-xl border border-border overflow-hidden">
-        <button class="faq-q w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-orange transition-colors">
-          <span>¿Tienen permiso para transportar carga MATPEL?</span>
-          <span class="faq-toggle text-gray-text flex-shrink-0 text-xl font-normal">+</span>
-        </button>
-        <div class="faq-a px-6 pb-5 text-gray-text text-sm leading-relaxed">Sí. Contamos con permiso MTC para materiales peligrosos (MATPEL) con protocolo y documentación específica. Conductores certificados para el manejo de estas cargas.</div>
-      </div>
-      <div class="faq-item bg-white rounded-xl border border-border overflow-hidden">
-        <button class="faq-q w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-orange transition-colors">
-          <span>¿Pueden ingresar a minas y proyectos especiales?</span>
-          <span class="faq-toggle text-gray-text flex-shrink-0 text-xl font-normal">+</span>
-        </button>
-        <div class="faq-a px-6 pb-5 text-gray-text text-sm leading-relaxed">Sí. Tenemos habilitación para ingresar a las principales operaciones mineras: Quellaveco (Anglo American), Antapaccay, Refinería Talara y otros proyectos nacionales. Acceso a todos los almacenes del Callao.</div>
-      </div>
-      <div class="faq-item bg-white rounded-xl border border-border overflow-hidden">
-        <button class="faq-q w-full text-left px-6 py-5 flex justify-between items-center gap-4 font-semibold text-navy hover:text-orange transition-colors">
-          <span>¿Trabajan con el sector público?</span>
-          <span class="faq-toggle text-gray-text flex-shrink-0 text-xl font-normal">+</span>
-        </button>
-        <div class="faq-a px-6 pb-5 text-gray-text text-sm leading-relaxed">Sí. Jhaz está empadronado en el RNP y habilitado por SUNAT como importador/exportador. Participamos en licitaciones y contratos con entidades estatales peruanas.</div>
-      </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container" style="max-width:800px">
+    <div style="text-align:center;margin-bottom:40px">
+      <h2 class="section-title" style="text-align:center">Preguntas Frecuentes</h2>
+      <p style="color:var(--t400);font-size:14px;margin-top:8px">Respuestas rápidas a las consultas más comunes</p>
+    </div>
+    <div id="faq">
+      <div class="faq-item"><button class="faq-q">¿Qué incluye el servicio de transporte de Jhaz?<span class="faq-plus">+</span></button><div class="faq-a">Recojo en almacén, transporte con GPS, seguro de carga, factura electrónica, guía de remisión y acta de entrega digital. Para clientes con línea de crédito, el pago se consolida a 30 días en una sola factura.</div></div>
+      <div class="faq-item"><button class="faq-q">¿Cómo funciona el crédito a 30 días?<span class="faq-plus">+</span></button><div class="faq-a">Presentás ficha RUC, vigencia de poder, DNI del representante y dos referencias comerciales. En 72 horas aprobamos la línea sin garantías personales. Los envíos del mes se consolidan en una sola factura con vencimiento a 30 días.</div></div>
+      <div class="faq-item"><button class="faq-q">¿Tienen permiso para transportar carga MATPEL?<span class="faq-plus">+</span></button><div class="faq-a">Sí. Contamos con permiso MTC para materiales peligrosos (MATPEL) con protocolo y documentación específica. Conductores certificados para el manejo de estas cargas.</div></div>
+      <div class="faq-item"><button class="faq-q">¿Pueden ingresar a minas y proyectos especiales?<span class="faq-plus">+</span></button><div class="faq-a">Sí. Tenemos habilitación para ingresar a las principales operaciones: Quellaveco (Anglo American), Antapaccay, Refinería Talara y otros proyectos nacionales. También tenemos acceso a todos los almacenes del Callao.</div></div>
     </div>
   </div>
 </section>
 </main>
 
 <!-- FOOTER -->
-<footer class="bg-navy py-14 px-8" id="contacto">
-  <div class="max-w-container mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
-      <div class="md:col-span-1">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-8 h-8 bg-orange rounded-lg flex items-center justify-center"><span class="text-navy font-black text-xs">JH</span></div>
-          <span class="text-white font-bold text-lg">Jhaz</span>
-        </div>
-        <p class="text-white/50 text-sm leading-relaxed mb-4">Soluciones integrales de transporte, almacenamiento y distribución para el mercado peruano y global.</p>
-        <div class="flex flex-col gap-2">
-          <span class="text-xs text-white/40 border border-white/10 rounded-full px-3 py-1 inline-flex items-center gap-2 w-fit"><span class="w-1.5 h-1.5 bg-success rounded-full"></span>RNP Activo</span>
-          <span class="text-xs text-white/40 border border-white/10 rounded-full px-3 py-1 inline-flex items-center gap-2 w-fit"><span class="w-1.5 h-1.5 bg-success rounded-full"></span>SUNAT · MTC vigente</span>
-        </div>
-      </div>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
       <div>
-        <h4 class="text-orange text-xs font-bold uppercase tracking-widest mb-4">Servicios</h4>
-        <ul class="space-y-2">
-          <li><a href="servicio-nacional.html" class="text-white/50 text-sm hover:text-white transition-colors">Transporte nacional</a></li>
-          <li><a href="servicio-nacional.html" class="text-white/50 text-sm hover:text-white transition-colors">Carga local Lima</a></li>
-          <li><a href="servicio-nacional.html" class="text-white/50 text-sm hover:text-white transition-colors">Carga MATPEL</a></li>
-          <li><a href="servicio-nacional.html" class="text-white/50 text-sm hover:text-white transition-colors">Plataformas y cama baja</a></li>
-          <li><a href="servicio-nacional.html" class="text-white/50 text-sm hover:text-white transition-colors">Carga internacional</a></li>
-        </ul>
+        <div class="footer-brand">Jhaz · Siempre Atentos</div>
+        <p class="footer-desc">Soluciones integrales de transporte, almacenamiento y distribución para el mercado peruano y global.</p>
+        <div class="footer-badge"><span class="footer-dot"></span>RNP Activo</div><br>
+        <div class="footer-badge" style="margin-top:6px"><span class="footer-dot"></span>SUNAT · MTC vigente</div>
       </div>
-      <div>
-        <h4 class="text-orange text-xs font-bold uppercase tracking-widest mb-4">Empresa</h4>
-        <ul class="space-y-2">
-          <li><a href="credito.html" class="text-white/50 text-sm hover:text-white transition-colors">Crédito 30 días</a></li>
-          <li><a href="portal.html" class="text-white/50 text-sm hover:text-white transition-colors">Portal del cliente</a></li>
-          <li><a href="blog.html" class="text-white/50 text-sm hover:text-white transition-colors">Recursos y guías</a></li>
-          <li><a href="#proyectos" class="text-white/50 text-sm hover:text-white transition-colors">Proyectos</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-orange text-xs font-bold uppercase tracking-widest mb-4">Contacto</h4>
-        <ul class="space-y-2">
-          <li><a href="tel:+51991913935" class="text-white/50 text-sm hover:text-white transition-colors">+51 991 913 935</a></li>
-          <li><a href="tel:+51933428035" class="text-white/50 text-sm hover:text-white transition-colors">+51 933 428 035</a></li>
-          <li><a href="mailto:comercial@jhaz.com.pe" class="text-white/50 text-sm hover:text-white transition-colors">comercial@jhaz.com.pe</a></li>
-          <li class="text-white/50 text-sm">San Miguel, Lima, Perú</li>
-          <li class="text-white/50 text-sm">RUC 20600135261</li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Servicios</h4><ul>
+        <li><a href="servicios.html">Transporte Nacional</a></li>
+        <li><a href="servicios.html">Carga Internacional</a></li>
+        <li><a href="servicios.html">Carga MATPEL</a></li>
+        <li><a href="servicios.html">Cama baja y plataformas</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Empresa</h4><ul>
+        <li><a href="nosotros.html">Nuestra Historia</a></li>
+        <li><a href="nosotros.html">Misión y Visión</a></li>
+        <li><a href="nosotros.html#proyectos">Proyectos</a></li>
+        <li><a href="portal.html">Portal del Cliente</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contacto</h4><ul>
+        <li><a href="tel:+51991913935">+51 991 913 935</a></li>
+        <li><a href="tel:+51933428035">+51 933 428 035</a></li>
+        <li><a href="mailto:comercial@jhaz.com.pe">comercial@jhaz.com.pe</a></li>
+        <li><span style="color:rgba(255,255,255,.5);font-size:13px">San Miguel, Lima, Perú</span></li>
+        <li><span style="color:rgba(255,255,255,.5);font-size:13px">RUC 20600135261</span></li>
+      </ul></div>
     </div>
-    <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/30">
+    <div class="footer-bottom">
       <span>© 2026 Jhaz Operador Logístico S.A.C. Todos los derechos reservados.</span>
-      <div class="flex gap-6">
-        <a href="#" class="hover:text-white/60 transition-colors">Términos y Condiciones</a>
-        <a href="#" class="hover:text-white/60 transition-colors">Política de Privacidad</a>
-        <a href="#" class="hover:text-white/60 transition-colors">Libro de Reclamaciones</a>
+      <div class="footer-bottom-links">
+        <a href="#">Términos y Condiciones</a>
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Libro de Reclamaciones</a>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- WhatsApp float -->
-<a href="https://wa.me/+51991913935?text=Hola%20Jhaz%2C%20quisiera%20una%20cotizaci%C3%B3n" target="_blank" rel="noopener" class="fixed bottom-7 right-7 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-transform group" aria-label="WhatsApp">
-  <svg class="w-7 h-7 fill-white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.435 5.632 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  <span class="absolute right-full mr-3 bg-navy text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">¿Cómo podemos ayudarte?</span>
+<a href="https://wa.me/+51991913935?text=Hola%20Jhaz" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg width="26" height="26" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.435 5.632 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
 // Cotizador
 (function(){
-  var f=document.getElementById('qf');if(!f)return;
   var R={'Lima-Callao':[200,320],'Lima-Arequipa':[1400,1900],'Lima-Trujillo':[950,1400],'Lima-Piura':[1700,2200],'Lima-Cusco':[2000,2700],'Lima-Bolivia':[3500,5500],'Callao-Arequipa':[1500,2000]};
   var V={'Menos de 1t':.7,'1 a 5t':1,'5 a 15t':1.9,'Más de 15t':3.5};
-  var T={'General / paletizada':1,'MATPEL':1.5,'Sobredimensionada':1.8,'Contenedor':2.2};
-  f.addEventListener('submit',function(e){
+  var T={'General':1,'MATPEL':1.5,'Sobredimensionada':1.8,'Contenedor':2.2};
+  document.getElementById('qf').addEventListener('submit',function(e){
     e.preventDefault();
     var o=document.getElementById('qo').value,d=document.getElementById('qd').value,t=document.getElementById('qt').value,v=document.getElementById('qv').value;
     if(!o||!d||!t||!v)return;
-    var k1=o+'-'+d,k2=d+'-'+o,rng=R[k1]||R[k2]||[1200,1800];
-    var vm=V[v]||1,tm=T[t]||1;
-    var lo=Math.round(rng[0]*vm*tm/100)*100,hi=Math.round(rng[1]*vm*tm/100)*100;
+    var rng=R[o+'-'+d]||R[d+'-'+o]||[1200,1800];
+    var lo=Math.round(rng[0]*(V[v]||1)*(T[t]||1)/100)*100,hi=Math.round(rng[1]*(V[v]||1)*(T[t]||1)/100)*100;
     document.getElementById('qrv').textContent='S/ '+lo.toLocaleString('es-PE')+' — S/ '+hi.toLocaleString('es-PE');
     var r=document.getElementById('qr');r.classList.remove('show');requestAnimationFrame(function(){r.classList.add('show')});
   });
@@ -643,19 +456,11 @@ document.querySelectorAll('.faq-q').forEach(function(b){
     if(!o)i.classList.add('open');
   });
 });
-// Scroll reveal with stagger
+// Reveal
 (function(){
-  if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});return}
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        var s=[].slice.call(e.target.parentElement&&e.target.parentElement.querySelectorAll('.reveal')||[]);
-        e.target.style.transitionDelay=Math.min(s.indexOf(e.target)*80,320)+'ms';
-        e.target.classList.add('in');io.unobserve(e.target);
-      }
-    });
-  },{threshold:.1,rootMargin:'0px 0px -50px 0px'});
-  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+  if(!('IntersectionObserver' in window)){document.querySelectorAll('.rev').forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var s=[].slice.call(e.target.parentElement.querySelectorAll('.rev'));e.target.style.transitionDelay=Math.min(s.indexOf(e.target)*80,280)+'ms';e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rev').forEach(function(e){io.observe(e)});
 })();
 </script>
 </body>
