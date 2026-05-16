@@ -5,120 +5,479 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jhaz Operador Logístico — Siempre Atentos</title>
 <meta name="description" content="Operador logístico formal en Perú. Crédito 30 días, tracking GPS, permiso MATPEL y acceso a todos los almacenes del Callao. Proveedor de Acciona, DP World y Mina Quellaveco.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Jhaz Operador Logístico S.A.C.","slogan":"Siempre Atentos","url":"https://jhaz.com.pe","telephone":["+51991913935","+51933428035"],"email":"comercial@jhaz.com.pe","address":{"@type":"PostalAddress","addressLocality":"San Miguel","addressRegion":"Lima","addressCountry":"PE"},"foundingDate":"2015","vatID":"20600135261"}</script>
+
 <style>
-/* ===== INDEX-ONLY STYLES ===== */
-.hero { background:var(--navy-dark); min-height:620px; display:flex; align-items:center; position:relative; overflow:hidden; }
-.hero-bg { position:absolute; inset:0; }
-.hero-bg img { width:100%; height:100%; object-fit:cover; opacity:.25; }
-.hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(105deg,var(--navy-dark) 40%,rgba(15,34,64,.6) 100%); }
-.hero-inner { position:relative; z-index:1; max-width:1280px; margin:0 auto; padding:80px 32px; display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:center; }
-.hero-eye { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--orange); margin-bottom:20px; }
-.hero-eye::before { content:''; width:20px; height:2px; background:var(--orange); }
-.hero h1 { font-size:clamp(36px,4.8vw,58px); font-weight:800; color:#fff; line-height:1.05; letter-spacing:-.025em; margin-bottom:18px; }
-.hero h1 span { color:var(--orange); }
-.hero-sub { font-size:16px; color:rgba(255,255,255,.7); line-height:1.7; max-width:480px; margin-bottom:30px; }
-.hero-btns { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:36px; }
-.hero-trust { display:flex; gap:18px; flex-wrap:wrap; padding-top:24px; border-top:1px solid rgba(255,255,255,.12); }
-.trust-item { display:flex; align-items:center; gap:6px; font-size:11px; color:rgba(255,255,255,.55); font-weight:500; }
-.trust-dot { width:5px; height:5px; background:var(--success); border-radius:999px; flex-shrink:0; }
+/* ============================================================
+   JHAZ — CINEMATIC DESIGN SYSTEM
+   Técnicas: Ken Burns · Parallax · Clip-path reveals · Masks
+   ============================================================ */
 
-/* Quote card in hero */
-.qcard { background:#fff; border-radius:16px; padding:26px; box-shadow:0 24px 64px rgba(0,0,0,.3); }
-.qcard h3 { font-size:18px; font-weight:700; color:var(--navy); margin-bottom:4px; }
-.qcard p { font-size:12px; color:var(--t400); margin-bottom:18px; }
-.q-field { display:flex; flex-direction:column; gap:4px; margin-bottom:12px; }
-.q-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--t600); }
-.q-select { padding:10px 12px; border:1.5px solid var(--border); border-radius:7px; font-size:13px; font-family:inherit; background:#fff; color:var(--t); -webkit-appearance:none; transition:border-color 150ms; }
-.q-select:focus { outline:none; border-color:var(--navy); }
-.q-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.q-btn { width:100%; padding:13px; background:var(--navy); color:#fff; border:none; border-radius:8px; font-size:14px; font-weight:700; font-family:inherit; cursor:pointer; transition:all 150ms; margin-top:2px; }
-.q-btn:hover { background:var(--navy-mid); }
-.q-result { display:none; margin-top:12px; padding:14px; background:rgba(246,173,85,.1); border:1.5px solid rgba(246,173,85,.35); border-radius:10px; }
-.q-result.show { display:block; animation:fadein .3s ease; }
-@keyframes fadein { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
-.q-result-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--orange-dark); margin-bottom:3px; }
-.q-result-val { font-size:22px; font-weight:800; color:var(--navy); }
-.q-result-note { font-size:11px; color:var(--t400); margin-top:5px; line-height:1.5; }
+/* === SCROLL PROGRESS BAR === */
+.progress-bar {
+  position: fixed; top: 68px; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--orange), #fff8, var(--orange));
+  background-size: 200% 100%;
+  z-index: 49; transition: width .1s linear;
+  animation: shimmer 2s linear infinite;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
 
-/* Clients band */
-.clients-band { background:var(--navy); padding:32px 0; overflow:hidden; }
-.clients-band-label { text-align:center; font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-bottom:20px; }
+/* === HERO CINEMATIC === */
+.hero {
+  position: relative; overflow: hidden;
+  min-height: 100vh; display: flex; align-items: center;
+  background: var(--navy-dark);
+}
 
-/* Services overview */
-.svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-.svc-card { padding:28px; }
-.svc-icon { width:48px; height:48px; border-radius:10px; background:var(--surface-100); display:flex; align-items:center; justify-content:center; margin-bottom:16px; color:var(--navy); }
-.svc-icon svg { width:24px; height:24px; }
-.svc-title { font-size:17px; font-weight:700; color:var(--navy); margin-bottom:8px; }
-.svc-desc { font-size:13px; color:var(--t600); line-height:1.6; margin-bottom:14px; }
-.svc-check { display:flex; align-items:center; gap:7px; font-size:12px; color:var(--t600); margin-bottom:5px; }
-.svc-check svg { width:14px; height:14px; color:var(--success); flex-shrink:0; }
-.svc-link { display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:700; color:var(--orange-dark); margin-top:12px; }
+/* Layer 1: Deep background — moves slowest (parallax base) */
+.hero-bg {
+  position: absolute; inset: -20%; /* oversized for parallax travel */
+  will-change: transform;
+}
+.hero-bg img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  opacity: 0; transition: opacity 1.2s ease;
+  /* Ken Burns animation */
+  animation: kenBurns 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.hero-bg img.loaded { opacity: .28; }
+@keyframes kenBurns {
+  0%   { transform: scale(1.0) translate(0%, 0%); }
+  25%  { transform: scale(1.08) translate(-1.5%, -0.8%); }
+  50%  { transform: scale(1.12) translate(1%, -1.2%); }
+  75%  { transform: scale(1.06) translate(-0.5%, 0.8%); }
+  100% { transform: scale(1.1) translate(1.5%, 0.2%); }
+}
 
-/* Bento grid */
-.bento { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-.bento-photo { border-radius:14px; overflow:hidden; }
-.bento-photo img { width:100%; height:100%; object-fit:cover; min-height:280px; transition:transform .4s ease; }
-.bento-photo:hover img { transform:scale(1.04); }
-.bento-dark { background:var(--navy); border-radius:14px; padding:28px; position:relative; overflow:hidden; }
-.bento-dark-tag { font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:8px; }
-.bento-dark-title { font-size:20px; font-weight:700; color:#fff; margin-bottom:10px; }
-.bento-dark-desc { font-size:13px; color:rgba(255,255,255,.55); line-height:1.6; }
-.bento-dark-link { display:inline-flex; align-items:center; gap:5px; font-size:13px; font-weight:700; color:var(--orange); margin-top:16px; }
+/* Layer 2: Gradient overlay — cinematic depth */
+.hero-mask {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(105deg, rgba(15,34,64,.97) 0%, rgba(15,34,64,.85) 45%, rgba(26,54,93,.4) 100%),
+    linear-gradient(0deg, rgba(15,34,64,.6) 0%, transparent 50%);
+}
 
-/* Value band */
-.value-band { background:var(--navy); padding:72px 0; }
-.value-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:48px; }
-.value-card { border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:28px; transition:background 200ms; }
-.value-card:hover { background:rgba(255,255,255,.04); }
-.value-icon { width:44px; height:44px; background:rgba(246,173,85,.12); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
-.value-icon svg { width:22px; height:22px; color:var(--orange); }
-.value-title { font-size:17px; font-weight:700; color:#fff; margin-bottom:8px; }
-.value-desc { font-size:13px; color:rgba(255,255,255,.55); line-height:1.6; }
+/* Layer 3: Noise texture overlay (adds film grain feel) */
+.hero-grain {
+  position: absolute; inset: 0; opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+  pointer-events: none;
+}
 
-/* Process */
-.process-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; position:relative; }
-.process-grid::before { content:''; position:absolute; top:28px; left:10%; right:10%; height:2px; background:var(--border); z-index:0; }
-.process-step { text-align:center; position:relative; z-index:1; }
-.process-num { width:56px; height:56px; border-radius:999px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:13px; font-weight:700; }
-.process-num.done { background:var(--navy); color:#fff; }
-.process-num.active { background:var(--orange); color:var(--navy-dark); }
-.process-num.todo { background:#fff; border:2px solid var(--border); color:var(--t400); }
-.process-step h4 { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:4px; }
-.process-step p { font-size:12px; color:var(--t400); line-height:1.5; }
+/* Hero inner layout */
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1280px; margin: 0 auto; padding: 100px 32px 80px;
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: center;
+  width: 100%;
+}
 
-/* WA CTA box */
-.wa-box { background:var(--navy); border-radius:16px; padding:40px 48px; display:flex; align-items:center; justify-content:space-between; gap:24px; position:relative; overflow:hidden; }
-.wa-box::after { content:''; position:absolute; right:-60px; bottom:-60px; width:200px; height:200px; background:rgba(255,255,255,.03); border-radius:999px; }
+/* Cinematic text reveal — clip-path from bottom */
+.c-reveal {
+  overflow: hidden; display: block;
+}
+.c-reveal > * {
+  display: block;
+  transform: translateY(110%) skewY(4deg);
+  opacity: 0;
+  transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1),
+              opacity .8s ease;
+  will-change: transform;
+}
+.c-reveal.fired > * { transform: translateY(0) skewY(0); opacity: 1; }
 
-/* Projects */
-.proj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.proj-card { border-radius:12px; overflow:hidden; position:relative; aspect-ratio:4/3; display:block; }
-.proj-card img { width:100%; height:100%; object-fit:cover; transition:transform .4s ease; }
-.proj-card:hover img { transform:scale(1.05); }
-.proj-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(15,34,64,.88) 0%,rgba(15,34,64,.1) 65%); }
-.proj-info { position:absolute; bottom:0; left:0; right:0; padding:16px; }
-.proj-tag { font-size:9px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--orange); margin-bottom:4px; }
-.proj-name { font-size:15px; font-weight:700; color:#fff; }
+.hero-eye {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 24px;
+  opacity: 0; transform: translateX(-20px);
+  transition: all .8s cubic-bezier(0.76, 0, 0.24, 1) .2s;
+}
+.hero-eye::before { content: ''; width: 28px; height: 1px; background: var(--orange); }
+.hero-eye.fired { opacity: 1; transform: translateX(0); }
 
-/* FAQ */
-.faq-item { border-bottom:1px solid var(--border); }
-.faq-item:first-child { border-top:1px solid var(--border); }
-.faq-q { width:100%; text-align:left; padding:20px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; font-size:15px; font-weight:600; color:var(--navy); cursor:pointer; border:none; background:none; font-family:inherit; transition:color 150ms; }
-.faq-q:hover { color:var(--orange-dark); }
-.faq-plus { font-size:20px; color:var(--t400); flex-shrink:0; transition:transform .25s ease; }
-.faq-item.open .faq-plus { transform:rotate(45deg); color:var(--orange-dark); }
-.faq-a { max-height:0; overflow:hidden; font-size:14px; color:var(--t600); line-height:1.7; transition:max-height .35s ease,padding .3s ease; }
-.faq-item.open .faq-a { max-height:250px; padding-bottom:20px; }
+.hero h1 {
+  font-size: clamp(38px, 5vw, 64px); font-weight: 800;
+  color: #fff; line-height: 1.03; letter-spacing: -.03em;
+  margin-bottom: 0;
+}
+.hero h1 span { color: var(--orange); }
 
-@media(max-width:900px){ .hero-inner{grid-template-columns:1fr;gap:32px} .svc-grid{grid-template-columns:1fr} .value-grid{grid-template-columns:1fr} .process-grid{grid-template-columns:1fr 1fr;gap:24px} .process-grid::before{display:none} .proj-grid{grid-template-columns:1fr 1fr} .bento{grid-template-columns:1fr} .wa-box{flex-direction:column;padding:32px} }
+.hero-sub {
+  font-size: 17px; color: rgba(255,255,255,.65); line-height: 1.7;
+  max-width: 500px;
+  opacity: 0; transform: translateY(16px);
+  transition: all .9s cubic-bezier(0.76, 0, 0.24, 1) .7s;
+}
+.hero-sub.fired { opacity: 1; transform: translateY(0); }
+
+.hero-btns {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  opacity: 0; transform: translateY(16px);
+  transition: all .9s cubic-bezier(0.76, 0, 0.24, 1) .9s;
+}
+.hero-btns.fired { opacity: 1; transform: translateY(0); }
+
+.hero-trust {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  padding-top: 28px; border-top: 1px solid rgba(255,255,255,.1);
+  opacity: 0; transition: opacity 1s ease 1.1s;
+}
+.hero-trust.fired { opacity: 1; }
+.trust-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: rgba(255,255,255,.5); font-weight: 500; }
+.trust-dot { width: 5px; height: 5px; background: var(--success); border-radius: 999px; flex-shrink: 0; }
+
+/* === QUOTE CARD (unchanged but polished) === */
+.qcard {
+  background: rgba(255,255,255,.98);
+  backdrop-filter: blur(20px);
+  border-radius: 20px; padding: 28px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.1);
+  transform: translateY(24px); opacity: 0;
+  transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1) .5s, opacity .8s ease .5s;
+}
+.qcard.fired { transform: translateY(0); opacity: 1; }
+.qcard h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.qcard p { font-size: 12px; color: var(--t400); margin-bottom: 18px; }
+.q-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 11px; }
+.q-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--t600); }
+.q-select {
+  padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 13px; font-family: inherit; background: #fff; color: var(--t);
+  -webkit-appearance: none; transition: border-color 150ms, box-shadow 150ms;
+}
+.q-select:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(26,54,93,.1); }
+.q-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.q-btn {
+  width: 100%; padding: 13px; background: var(--navy); color: #fff; border: none;
+  border-radius: 10px; font-size: 14px; font-weight: 700; font-family: inherit;
+  cursor: pointer; transition: all 200ms; margin-top: 2px;
+  position: relative; overflow: hidden;
+}
+.q-btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+  transform: translateX(-100%); transition: transform .4s ease;
+}
+.q-btn:hover { background: var(--navy-mid); }
+.q-btn:hover::after { transform: translateX(100%); }
+.q-result { display: none; margin-top: 12px; padding: 14px; background: rgba(246,173,85,.1); border: 1.5px solid rgba(246,173,85,.4); border-radius: 10px; }
+.q-result.show { display: block; animation: cfadein .4s cubic-bezier(0.76, 0, 0.24, 1); }
+@keyframes cfadein { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.q-result-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--orange-dark); margin-bottom: 3px; }
+.q-result-val { font-size: 24px; font-weight: 800; color: var(--navy); }
+.q-result-note { font-size: 11px; color: var(--t400); margin-top: 5px; line-height: 1.5; }
+
+/* === WAVE DIVIDERS — smooth section transitions === */
+.wave-divider { line-height: 0; overflow: hidden; }
+.wave-divider svg { display: block; width: 100%; }
+.wave-down { margin-bottom: -2px; }
+.wave-up { margin-top: -2px; }
+
+/* === CLIENTS BAND === */
+.clients-band { background: var(--navy); padding: 32px 0; overflow: hidden; }
+.clients-band-label { text-align: center; font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 20px; }
+
+/* === CINEMATIC SCROLL REVEAL === */
+.reveal-up {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity .8s ease, transform .9s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+.reveal-up.in { opacity: 1; transform: translateY(0); }
+
+/* Horizontal reveal for headings */
+.reveal-clip {
+  overflow: hidden;
+}
+.reveal-clip > .inner {
+  display: block;
+  transform: translateY(100%);
+  transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.reveal-clip.in > .inner { transform: translateY(0); }
+
+/* === SERVICES BENTO === */
+.bento { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* Image with parallax container */
+.parallax-wrap { overflow: hidden; border-radius: 14px; }
+.parallax-img {
+  width: 100%; height: 100%; object-fit: cover; min-height: 280px;
+  transform: scale(1.12) translateY(0px);
+  will-change: transform; transition: transform 0.1s linear;
+}
+/* Hover reveal overlay */
+.bento-photo {
+  border-radius: 14px; overflow: hidden; position: relative; cursor: pointer;
+}
+.bento-photo .photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(15,34,64,.7) 100%);
+  opacity: 0; transition: opacity .4s ease;
+}
+.bento-photo:hover .photo-overlay { opacity: 1; }
+.bento-photo:hover .parallax-img { transform: scale(1.18) translateY(-10px); transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+.bento-dark {
+  background: var(--navy); border-radius: 14px; padding: 32px;
+  position: relative; overflow: hidden;
+}
+.bento-dark-tag { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 8px; }
+.bento-dark-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.bento-dark-desc { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.65; }
+.bento-dark-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--orange); margin-top: 16px; transition: gap .2s ease; }
+.bento-dark-link:hover { gap: 10px; }
+
+/* Service cards */
+.svc-icon { width: 48px; height: 48px; border-radius: 10px; background: var(--surface-100); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--navy); }
+.svc-icon svg { width: 24px; height: 24px; }
+.svc-title { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.svc-desc { font-size: 13px; color: var(--t600); line-height: 1.6; margin-bottom: 14px; }
+.svc-check { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--t600); margin-bottom: 6px; }
+.svc-check svg { width: 14px; height: 14px; color: var(--success); flex-shrink: 0; }
+.svc-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; color: var(--orange-dark); margin-top: 12px; transition: gap .2s; }
+.svc-link:hover { gap: 8px; }
+
+/* Card base */
+.card {
+  background: #fff; border: 1.5px solid var(--border); border-radius: 14px;
+  transition: transform .3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow .3s ease, border-color .3s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.1); border-color: rgba(26,54,93,.2); }
+
+/* === VALUE BAND (dark) === */
+.value-band { background: var(--navy); padding: 80px 0; position: relative; overflow: hidden; }
+
+/* Animated gradient lines in background */
+.value-lines {
+  position: absolute; inset: 0; overflow: hidden; opacity: .06;
+  pointer-events: none;
+}
+.value-lines::before, .value-lines::after {
+  content: '';
+  position: absolute;
+  width: 2px; top: 0; bottom: 0;
+  background: linear-gradient(to bottom, transparent, var(--orange), transparent);
+  animation: linePulse 3s ease-in-out infinite;
+}
+.value-lines::before { left: 25%; animation-delay: 0s; }
+.value-lines::after { left: 75%; animation-delay: 1.5s; }
+@keyframes linePulse {
+  0%, 100% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+}
+
+.value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+.value-card {
+  border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 28px;
+  transition: background .3s ease, border-color .3s ease, transform .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: default;
+}
+.value-card:hover { background: rgba(255,255,255,.05); border-color: rgba(246,173,85,.4); transform: translateY(-3px); }
+.value-icon { width: 44px; height: 44px; background: rgba(246,173,85,.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.value-icon svg { width: 22px; height: 22px; color: var(--orange); }
+.value-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.value-desc { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.65; }
+
+/* === STATS — count-up === */
+.sband { background: var(--navy); padding: 64px 0; }
+.sgrid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat-item { padding: 0 40px; border-right: 1px solid rgba(255,255,255,.1); text-align: center; }
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-size: clamp(40px, 5vw, 60px); font-weight: 800; color: #fff;
+  letter-spacing: -.04em; line-height: 1; margin-bottom: 8px;
+}
+.stat-num-val { display: inline-block; transition: transform .3s ease; }
+.stat-item:hover .stat-num-val { transform: scale(1.08); }
+.stat-sup { font-size: .42em; color: var(--orange); vertical-align: super; }
+.stat-label { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.5; }
+
+/* === PROCESS === */
+.process-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
+  position: relative;
+}
+.process-grid::before {
+  content: ''; position: absolute; top: 27px; left: 12%; right: 12%; height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), var(--border), transparent);
+}
+.process-step { text-align: center; }
+.process-num {
+  width: 54px; height: 54px; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; font-size: 13px; font-weight: 700;
+  transition: transform .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.process-step:hover .process-num { transform: scale(1.15); }
+.process-num.done { background: var(--navy); color: #fff; box-shadow: 0 6px 20px rgba(26,54,93,.3); }
+.process-num.active { background: var(--orange); color: var(--navy-dark); box-shadow: 0 6px 20px rgba(246,173,85,.4); }
+.process-num.todo { background: #fff; border: 2px solid var(--border); color: var(--t400); }
+.process-step h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.process-step p { font-size: 12px; color: var(--t400); line-height: 1.5; padding: 0 8px; }
+
+/* === WA CTA BOX === */
+.wa-box {
+  background: var(--navy); border-radius: 20px; padding: 44px 52px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  position: relative; overflow: hidden;
+}
+.wa-box::before {
+  content: ''; position: absolute; width: 300px; height: 300px; border-radius: 999px;
+  background: radial-gradient(circle, rgba(246,173,85,.15) 0%, transparent 70%);
+  top: -100px; right: -50px; pointer-events: none;
+}
+.wa-box::after {
+  content: ''; position: absolute; width: 200px; height: 200px; border-radius: 999px;
+  background: radial-gradient(circle, rgba(246,173,85,.08) 0%, transparent 70%);
+  bottom: -80px; left: 20%; pointer-events: none;
+}
+
+/* === PROJECTS CINEMATIC === */
+.proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.proj-card {
+  border-radius: 14px; overflow: hidden; position: relative;
+  aspect-ratio: 4/3; display: block;
+  cursor: pointer;
+}
+.proj-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.08);
+  transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+.proj-card:hover img { transform: scale(1.16); }
+
+.proj-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(15,34,64,.92) 0%, rgba(15,34,64,.3) 50%, rgba(15,34,64,.05) 100%);
+  transition: background .4s ease;
+}
+.proj-card:hover .proj-overlay {
+  background: linear-gradient(to top, rgba(15,34,64,.96) 0%, rgba(15,34,64,.5) 55%, rgba(15,34,64,.15) 100%);
+}
+
+.proj-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; }
+.proj-tag {
+  font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 5px;
+  transform: translateY(8px); opacity: .7;
+  transition: transform .4s ease, opacity .4s ease;
+}
+.proj-name {
+  font-size: 16px; font-weight: 700; color: #fff; line-height: 1.25;
+  transform: translateY(4px);
+  transition: transform .4s ease .05s;
+}
+.proj-card:hover .proj-tag { transform: translateY(0); opacity: 1; }
+.proj-card:hover .proj-name { transform: translateY(0); }
+
+/* Thin orange line on hover */
+.proj-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: var(--orange); transform: scaleX(0); transform-origin: left;
+  transition: transform .4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.proj-card:hover::after { transform: scaleX(1); }
+
+/* === FAQ === */
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-q {
+  width: 100%; text-align: left; padding: 20px 0;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  font-size: 15px; font-weight: 600; color: var(--navy);
+  cursor: pointer; border: none; background: none; font-family: inherit;
+  transition: color .2s;
+}
+.faq-q:hover { color: var(--orange-dark); }
+.faq-plus {
+  font-size: 22px; color: var(--t400); flex-shrink: 0;
+  transition: transform .3s cubic-bezier(0.76, 0, 0.24, 1), color .2s;
+}
+.faq-item.open .faq-plus { transform: rotate(45deg); color: var(--orange-dark); }
+.faq-a {
+  max-height: 0; overflow: hidden; font-size: 14px; color: var(--t600); line-height: 1.7;
+  transition: max-height .4s cubic-bezier(0.76, 0, 0.24, 1), padding .35s ease;
+}
+.faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+
+/* === CTA FINAL (Sé parte) === */
+.cta-final {
+  background: var(--navy); padding: 80px 0; position: relative; overflow: hidden;
+  text-align: center;
+}
+.cta-final::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(246,173,85,.08) 0%, transparent 70%);
+}
+.cta-btn-wa {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: #25D366; color: #fff; padding: 16px 32px; border-radius: 999px;
+  font-size: 16px; font-weight: 700;
+  transition: transform .2s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow .2s ease;
+  box-shadow: 0 8px 32px rgba(37,211,102,.35);
+}
+.cta-btn-wa:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 16px 48px rgba(37,211,102,.45); }
+.cta-btn-wa:active { transform: scale(.97); }
+
+/* Floating particles (subtle) */
+.particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.particle {
+  position: absolute; border-radius: 999px;
+  background: var(--orange); opacity: 0;
+  animation: float linear infinite;
+}
+@keyframes float {
+  0% { opacity: 0; transform: translateY(0) scale(0); }
+  10% { opacity: .4; transform: translateY(-20px) scale(1); }
+  90% { opacity: .2; transform: translateY(-200px) scale(0.5); }
+  100% { opacity: 0; transform: translateY(-220px) scale(0); }
+}
+
+/* === RESPONSIVE === */
+@media(max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero { min-height: auto; }
+  .hero-inner { padding: 80px 32px 60px; }
+}
+@media(max-width: 900px) {
+  .value-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .process-grid::before { display: none; }
+  .proj-grid { grid-template-columns: 1fr 1fr; }
+  .bento { grid-template-columns: 1fr; }
+  .sgrid { grid-template-columns: 1fr 1fr; }
+  .stat-item { padding: 24px 0; border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .wa-box { flex-direction: column; padding: 36px; }
+}
+@media(max-width: 600px) {
+  .proj-grid { grid-template-columns: 1fr; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  .hero-bg img { animation: none; opacity: .28 !important; }
+  .c-reveal > *, .hero-eye, .hero-sub, .hero-btns, .hero-trust, .qcard { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .value-lines::before, .value-lines::after, .particle { animation: none !important; }
+  .parallax-img { transform: scale(1.06) !important; transition: none !important; }
+  .proj-card img { transform: scale(1.04) !important; transition: none !important; }
+}
 </style>
 </head>
 <body>
 
+<!-- SCROLL PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
 <header class="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
@@ -137,21 +496,45 @@
 
 <main>
 
-<!-- HERO -->
-<section class="hero">
+<!-- ===== HERO — CINEMATIC SCENE 1 ===== -->
+<section class="hero" id="hero">
+  <!-- Background layers -->
   <div class="hero-bg">
-    <img src="carga01.png" alt="Flota Jhaz">
+    <img id="heroBgImg" src="carga01.png" alt="Flota Jhaz">
   </div>
+  <div class="hero-mask"></div>
+  <div class="hero-grain"></div>
+
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
+
   <div class="hero-inner">
+    <!-- Left: Copy -->
     <div>
-      <div class="hero-eye">Siempre Atentos · Lima, Perú</div>
-      <h1>Jhaz Operador Logístico:<br><span>Conectando tu carga</span><br>con el mundo</h1>
-      <p class="hero-sub">Transporte de carga variada local, nacional e internacional. Garantizamos que cada envío llegue a su destino con los más altos estándares de formalidad y seguridad.</p>
-      <div class="hero-btns">
-        <a href="contacto.html" class="btn btn-orange">Solicitar Cotización →</a>
-        <a href="servicios.html" class="btn" style="border:2px solid rgba(255,255,255,.35);color:#fff">Ver Servicios</a>
+      <div class="hero-eye" id="heroEye">Siempre Atentos · Lima, Perú</div>
+
+      <div style="margin-bottom:20px">
+        <div class="c-reveal" id="hLine1">
+          <div><h1 style="margin-bottom:0">Jhaz Operador Logístico:</h1></div>
+        </div>
+        <div class="c-reveal" id="hLine2" style="transition-delay:.15s">
+          <div><h1 style="margin-bottom:0"><span>Conectando tu carga</span></h1></div>
+        </div>
+        <div class="c-reveal" id="hLine3" style="transition-delay:.25s">
+          <div><h1>con el mundo</h1></div>
+        </div>
       </div>
-      <div class="hero-trust">
+
+      <p class="hero-sub" id="heroSub">
+        Transporte de carga variada local, nacional e internacional. Garantizamos que cada envío llegue a su destino con los más altos estándares de formalidad y seguridad.
+      </p>
+
+      <div class="hero-btns" id="heroBtns" style="margin:24px 0 32px">
+        <a href="contacto.html" class="btn" style="background:var(--orange);color:#fff;padding:14px 28px;font-size:15px">Solicitar Cotización →</a>
+        <a href="servicios.html" class="btn" style="border:2px solid rgba(255,255,255,.3);color:#fff;padding:14px 24px;font-size:15px">Ver Servicios</a>
+      </div>
+
+      <div class="hero-trust" id="heroTrust">
         <div class="trust-item"><span class="trust-dot"></span>RNP · Proveedor del Estado</div>
         <div class="trust-item"><span class="trust-dot"></span>Permiso MATPEL vigente</div>
         <div class="trust-item"><span class="trust-dot"></span>Acceso almacenes Callao</div>
@@ -159,8 +542,8 @@
       </div>
     </div>
 
-    <!-- Cotizador rápido -->
-    <div class="qcard">
+    <!-- Right: Cotizador -->
+    <div class="qcard" id="qcard">
       <h3>Estima tu envío</h3>
       <p>Rango referencial al instante · Cotización formal en 4 horas</p>
       <form id="qf">
@@ -193,13 +576,20 @@
       <div class="q-result" id="qr">
         <div class="q-result-label">Estimación referencial</div>
         <div class="q-result-val" id="qrv">—</div>
-        <div class="q-result-note">Para cotización formal con datos exactos → <a href="contacto.html" style="color:var(--orange-dark);font-weight:600">Solicitar Cotización</a></div>
+        <div class="q-result-note">Para cotización exacta → <a href="contacto.html" style="color:var(--orange-dark);font-weight:700">Solicitar Cotización</a></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CLIENTS -->
+<!-- WAVE TRANSITION: hero → clients -->
+<div class="wave-divider wave-down" style="background:var(--navy-dark)">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+    <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#1A365D"/>
+  </svg>
+</div>
+
+<!-- ===== CLIENTS BAND ===== -->
 <div class="clients-band">
   <div class="clients-band-label">Empresas que confían en Jhaz</div>
   <div class="clients-wrap">
@@ -218,7 +608,6 @@
         <div class="client-item"><img src="https://jhaz.com.pe/logos/fulter.png" alt="Fulter" class="client-logo"></div>
         <div class="client-item"><img src="https://jhaz.com.pe/logos/lahanseatica.png" alt="Lahanseatica" class="client-logo"></div>
       </div>
-      <!-- Duplicado para loop infinito -->
       <div style="display:flex;align-items:center">
         <div class="client-item"><img src="https://jhaz.com.pe/logos/acciona.png" alt="Acciona" class="client-logo"></div>
         <div class="client-item"><img src="https://jhaz.com.pe/logos/dpworld.png" alt="DP World" class="client-logo"></div>
@@ -237,151 +626,247 @@
   </div>
 </div>
 
-<!-- SERVICES OVERVIEW (resumen, detalle en servicios.html) -->
+<!-- WAVE TRANSITION: clients → services -->
+<div class="wave-divider" style="background:var(--navy)">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+    <path d="M0,0 C360,60 1080,0 1440,60 L1440,0 Z" fill="#F7FAFC"/>
+  </svg>
+</div>
+
+<!-- ===== SERVICES — SCENE 2 ===== -->
 <section class="section" style="background:var(--surface-100)">
   <div class="container">
-    <div class="section-tag">Especialización</div>
-    <h2 class="section-title">Servicios que Impulsan su Negocio</h2>
-    <p class="section-sub" style="margin-bottom:40px">Soluciones logísticas integrales para operaciones locales, nacionales e internacionales — incluyendo carga especial y proyectos de gran escala.</p>
+    <div class="section-tag">Soluciones logísticas integrales</div>
+    <div class="reveal-clip" style="margin-bottom:12px">
+      <h2 class="section-title inner">Servicios que Impulsan<br>su Negocio</h2>
+    </div>
+    <p class="section-sub reveal-up" style="margin-bottom:40px">Transporte de carga variada para operaciones locales, nacionales e internacionales — incluyendo carga especial y proyectos de gran escala.</p>
 
-    <div class="bento" style="margin-bottom:16px">
+    <div class="bento reveal-up" style="margin-bottom:14px">
+      <!-- Card: Nacional -->
       <div class="card" style="padding:28px">
         <div class="svc-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25"/></svg></div>
         <div class="svc-title">Carga Nacional</div>
-        <div class="svc-desc">Furgones 1-30t, plataformas, cama bajas y cama cunas para todo el Perú. Monitoreo GPS constante y entrega puerta a puerta.</div>
+        <div class="svc-desc">Furgones 1-30t, plataformas, cama bajas y cama cunas para todo el Perú. Entrega puerta a puerta con factura electrónica.</div>
         <div class="svc-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Cobertura a las 24 regiones</div>
         <div class="svc-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Monitoreo GPS 24/7</div>
         <div class="svc-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Seguro de carga incluido</div>
         <a href="servicios.html" class="svc-link">Ver detalles →</a>
       </div>
+      <!-- Center photo with parallax -->
       <div class="bento-photo">
-        <img src="carga03.png" alt="Transporte nacional de carga">
+        <img src="carga03.png" alt="Transporte nacional" class="parallax-img" data-parallax>
+        <div class="photo-overlay"></div>
       </div>
     </div>
 
-    <div class="bento">
-      <div class="bento-dark rev">
+    <div class="bento reveal-up">
+      <!-- Dark card: Internacional -->
+      <div class="bento-dark">
         <div class="bento-dark-tag">Logística Global</div>
         <div class="bento-dark-title">Carga Internacional</div>
         <div class="bento-dark-desc">Exportación e importación con coordinación aduanera. Bolivia, Chile y LATAM. Acceso a todos los almacenes del Callao para operaciones portuarias.</div>
         <a href="servicios.html" class="bento-dark-link">Más información →</a>
-        <div style="position:absolute;right:-20px;bottom:-20px;opacity:.07">
-          <svg width="140" height="140" fill="white" viewBox="0 0 24 24"><path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918"/></svg>
+        <div style="position:absolute;right:-20px;bottom:-20px;opacity:.06">
+          <svg width="150" height="150" fill="white" viewBox="0 0 24 24"><path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582"/></svg>
         </div>
       </div>
-      <div class="card rev" style="padding:0;overflow:hidden">
-        <img src="carga06.png" alt="Carga especial y pesada" style="width:100%;height:220px;object-fit:cover">
-        <div style="padding:20px">
-          <div class="svc-title" style="font-size:15px">Carga Especial y Pesada</div>
-          <div class="svc-desc">Cama bajas, plataformas y modulares para maquinaria minera y proyectos industriales. Con escolta cuando se requiere.</div>
-          <div style="font-size:11px;font-weight:700;color:var(--orange-dark);text-transform:uppercase;letter-spacing:.1em">Acceso habilitado a minas y proyectos</div>
+      <!-- Photo: Carga especial with parallax -->
+      <div class="bento-photo">
+        <img src="carga06.png" alt="Carga especial" class="parallax-img" data-parallax>
+        <div class="photo-overlay"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(to top,rgba(15,34,64,.85),transparent)">
+          <div style="font-size:10px;font-weight:700;color:var(--orange);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">Acceso habilitado a minas y proyectos</div>
+          <div style="font-size:15px;font-weight:700;color:#fff">Carga Especial y Pesada</div>
         </div>
       </div>
     </div>
+
     <div style="text-align:center;margin-top:28px">
-      <a href="servicios.html" class="btn btn-navy">Ver todos los servicios →</a>
+      <a href="servicios.html" class="btn" style="background:var(--navy);color:#fff;font-size:15px;padding:14px 32px">Ver todos los servicios →</a>
     </div>
   </div>
 </section>
 
-<!-- VALUE BAND -->
+<!-- WAVE: services → value -->
+<div class="wave-divider" style="background:var(--surface-100)">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+    <path d="M0,60 C480,0 960,60 1440,0 L1440,60 Z" fill="#1A365D"/>
+  </svg>
+</div>
+
+<!-- ===== VALUE BAND — SCENE 3 ===== -->
 <section class="value-band">
-  <div class="container">
+  <div class="value-lines"></div>
+  <div class="container" style="position:relative;z-index:1">
     <div style="text-align:center">
       <div class="section-tag" style="justify-content:center">El valor de elegir Jhaz</div>
-      <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.1;margin-top:4px">Más de 10 años garantizando<br>puntualidad y seguridad en cada kilómetro.</h2>
+      <div class="reveal-clip" style="margin-top:8px">
+        <h2 class="inner" style="font-size:clamp(26px,3.5vw,40px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.1">Más de 10 años garantizando<br>puntualidad y seguridad<br>en cada kilómetro.</h2>
+      </div>
     </div>
     <div class="value-grid">
-      <div class="value-card rev">
+      <div class="value-card reveal-up">
         <div class="value-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg></div>
         <div class="value-title">Crédito 30 días</div>
-        <div class="value-desc">Línea de crédito empresarial sin garantías personales. Aprobación en 72 horas con documentación estándar. Consolida todos los envíos del mes en una sola factura.</div>
+        <div class="value-desc">Línea de crédito empresarial sin garantías personales. Aprobación en 72 horas. Consolida todos los envíos del mes en una sola factura.</div>
       </div>
-      <div class="value-card rev">
+      <div class="value-card reveal-up">
         <div class="value-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg></div>
         <div class="value-title">Formalidad Completa</div>
         <div class="value-desc">Factura electrónica, SCTR vigente, seguro de carga, RNP activo, permiso MATPEL y acceso al Callao. Sin sorpresas con SUNAT ni con tu cliente.</div>
       </div>
-      <div class="value-card rev">
+      <div class="value-card reveal-up">
         <div class="value-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg></div>
         <div class="value-title">Tracking en Tiempo Real</div>
-        <div class="value-desc">GPS y monitoreo constante en todas las unidades. Flota disponible 24/7, 365 días. Tu cliente sabe dónde está su carga en todo momento.</div>
+        <div class="value-desc">GPS activo en todas las unidades. Flota disponible 24/7, 365 días. Tu cliente sabe dónde está su carga en todo momento desde el portal.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROCESS + WA CTA -->
+<!-- WAVE: value → process -->
+<div class="wave-divider" style="background:var(--navy)">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+    <path d="M0,0 C720,60 1440,0 1440,0 L1440,60 L0,60 Z" fill="#F7FAFC"/>
+  </svg>
+</div>
+
+<!-- ===== PROCESS + WA CTA ===== -->
 <section class="section">
   <div class="container">
-    <div style="text-align:center;margin-bottom:40px">
-      <h2 class="section-title" style="text-align:center">Su carga en manos expertas</h2>
-      <p style="color:var(--t400);font-size:14px">Nuestro flujo de trabajo optimizado paso a paso</p>
+    <div style="text-align:center;margin-bottom:44px">
+      <h2 class="section-title reveal-clip" style="text-align:center">
+        <span class="inner">Su carga en manos expertas</span>
+      </h2>
+      <p style="color:var(--t400);font-size:14px;margin-top:8px">Nuestro flujo de trabajo optimizado, paso a paso</p>
     </div>
-    <div class="process-grid" style="margin-bottom:40px">
-      <div class="process-step rev">
+
+    <div class="process-grid" style="margin-bottom:44px">
+      <div class="process-step reveal-up">
         <div class="process-num done"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15"/></svg></div>
         <h4>Cotización</h4><p>Evaluamos tu carga y brindamos la mejor tarifa</p>
       </div>
-      <div class="process-step rev">
+      <div class="process-step reveal-up">
         <div class="process-num done"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25"/></svg></div>
         <h4>Recojo</h4><p>Recolectamos tu mercadería con puntualidad</p>
       </div>
-      <div class="process-step rev">
+      <div class="process-step reveal-up">
         <div class="process-num active"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg></div>
-        <h4>Tránsito</h4><p>Monitoreo GPS activo durante todo el trayecto</p>
+        <h4>Tránsito</h4><p>GPS activo durante todo el trayecto</p>
       </div>
-      <div class="process-step rev">
+      <div class="process-step reveal-up">
         <div class="process-num todo"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-        <h4>Entrega</h4><p>Entrega confirmada, documentada y facturada</p>
+        <h4>Entrega</h4><p>Confirmada, documentada y facturada</p>
       </div>
     </div>
 
-    <div class="wa-box">
+    <div class="wa-box reveal-up">
       <div style="position:relative;z-index:1">
-        <p style="color:rgba(255,255,255,.6);font-size:13px;margin-bottom:6px">¿Listo para mover tu carga?</p>
-        <p style="color:#fff;font-size:17px;font-weight:600;max-width:400px">Obtén una cotización en menos de 4 horas a través de nuestros canales de atención prioritaria.</p>
+        <p style="color:rgba(255,255,255,.55);font-size:13px;margin-bottom:6px">¿Listo para mover tu carga?</p>
+        <p style="color:#fff;font-size:18px;font-weight:700;max-width:420px;letter-spacing:-.01em">Obtén una cotización personalizada en menos de 4 horas.</p>
       </div>
-      <div style="position:relative;z-index:1;display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap">
-        <a href="https://wa.me/+51991913935?text=Hola%20Jhaz%2C%20quisiera%20una%20cotizaci%C3%B3n" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:13px 22px;border-radius:999px;font-size:14px;font-weight:700;transition:opacity 150ms" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
+      <div style="position:relative;z-index:1;display:flex;gap:12px;flex-wrap:wrap;flex-shrink:0">
+        <a href="https://wa.me/+51991913935?text=Hola%20Jhaz%2C%20quisiera%20una%20cotizaci%C3%B3n" target="_blank" class="cta-btn-wa" style="font-size:14px;padding:13px 22px">
           <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.435 5.632 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Cotizar por WhatsApp
         </a>
-        <a href="contacto.html" class="btn" style="border:1px solid rgba(255,255,255,.25);color:#fff">Formulario web →</a>
+        <a href="contacto.html" class="btn" style="border:1px solid rgba(255,255,255,.25);color:#fff;padding:13px 20px">Formulario web →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROYECTOS -->
+<!-- WAVE: process → projects -->
+<div class="wave-divider" style="background:#fff">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+    <path d="M0,30 C360,0 1080,60 1440,30 L1440,60 L0,60 Z" fill="#EDF2F7"/>
+  </svg>
+</div>
+
+<!-- ===== PROJECTS — SCENE 4 ===== -->
 <section class="section" id="proyectos" style="background:var(--surface-100)">
   <div class="container">
     <div class="section-tag">Principales proyectos</div>
-    <h2 class="section-title">Donde la logística<br>realmente importa.</h2>
-    <p class="section-sub" style="margin-bottom:36px">Minería, energía e industria pesada. Los proyectos más exigentes del Perú y Bolivia confían en Jhaz.</p>
+    <div class="reveal-clip"><h2 class="section-title inner">Donde la logística<br>realmente importa.</h2></div>
+    <p class="section-sub reveal-up" style="margin-bottom:36px">Minería, energía e industria pesada. Los proyectos más exigentes del Perú y Bolivia confían en Jhaz.</p>
+
     <div class="proj-grid">
-      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/mina_quellaveco.webp" alt="Mina Quellaveco"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Nacional · Anglo American</div><div class="proj-name">Mina Quellaveco</div></div></a>
-      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/mina_antapaccay.webp" alt="Mina Antapaccay"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Nacional · Cobre · Cusco</div><div class="proj-name">Mina Antapaccay</div></div></a>
-      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/refineria_talara.webp" alt="Refinería Talara"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Nacional · Petroquímica · Piura</div><div class="proj-name">Refinería Talara</div></div></a>
-      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/proyecto_punta_lomitas.webp" alt="Punta Lomitas"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Nacional · Acciona · Energía eólica</div><div class="proj-name">Proyecto Punta Lomitas</div></div></a>
-      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/cementera_potosi.webp" alt="Cementera Potosí"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Internacional · Bolivia</div><div class="proj-name">Cementera Potosí</div></div></a>
-      <a href="nosotros.html#proyectos" class="proj-card rev"><img src="https://jhaz.com.pe/proyectos/Importación_de_contenedores.webp" alt="Importación Contenedores"><div class="proj-overlay"></div><div class="proj-info"><div class="proj-tag">Callao · Logística portuaria</div><div class="proj-name">Importación de Contenedores</div></div></a>
+      <a href="nosotros.html#proyectos" class="proj-card reveal-up">
+        <img src="https://jhaz.com.pe/proyectos/mina_quellaveco.webp" alt="Mina Quellaveco">
+        <div class="proj-overlay"></div>
+        <div class="proj-info"><div class="proj-tag">Nacional · Anglo American</div><div class="proj-name">Mina Quellaveco</div></div>
+      </a>
+      <a href="nosotros.html#proyectos" class="proj-card reveal-up">
+        <img src="https://jhaz.com.pe/proyectos/mina_antapaccay.webp" alt="Mina Antapaccay">
+        <div class="proj-overlay"></div>
+        <div class="proj-info"><div class="proj-tag">Nacional · Cobre · Cusco</div><div class="proj-name">Mina Antapaccay</div></div>
+      </a>
+      <a href="nosotros.html#proyectos" class="proj-card reveal-up">
+        <img src="https://jhaz.com.pe/proyectos/refineria_talara.webp" alt="Refinería Talara">
+        <div class="proj-overlay"></div>
+        <div class="proj-info"><div class="proj-tag">Nacional · Petroquímica</div><div class="proj-name">Refinería Talara</div></div>
+      </a>
+      <a href="nosotros.html#proyectos" class="proj-card reveal-up">
+        <img src="https://jhaz.com.pe/proyectos/proyecto_punta_lomitas.webp" alt="Punta Lomitas">
+        <div class="proj-overlay"></div>
+        <div class="proj-info"><div class="proj-tag">Nacional · Acciona · Energía</div><div class="proj-name">Proyecto Punta Lomitas</div></div>
+      </a>
+      <a href="nosotros.html#proyectos" class="proj-card reveal-up">
+        <img src="https://jhaz.com.pe/proyectos/cementera_potosi.webp" alt="Cementera Potosí">
+        <div class="proj-overlay"></div>
+        <div class="proj-info"><div class="proj-tag">Internacional · Bolivia</div><div class="proj-name">Cementera Potosí</div></div>
+      </a>
+      <a href="nosotros.html#proyectos" class="proj-card reveal-up">
+        <img src="https://jhaz.com.pe/proyectos/Importación_de_contenedores.webp" alt="Contenedores">
+        <div class="proj-overlay"></div>
+        <div class="proj-info"><div class="proj-tag">Callao · Logística portuaria</div><div class="proj-name">Importación de Contenedores</div></div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="section">
+<!-- WAVE → CTA final -->
+<div class="wave-divider" style="background:var(--surface-100)">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+    <path d="M0,60 C360,0 1080,60 1440,0 L1440,60 Z" fill="#1A365D"/>
+  </svg>
+</div>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="cta-final">
+  <div class="particles" id="ctaParticles"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="reveal-clip"><h2 class="inner" style="font-size:clamp(26px,3.5vw,44px);font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:14px">Sé parte de nuestra<br>red logística</h2></div>
+    <p class="reveal-up" style="color:rgba(255,255,255,.6);font-size:16px;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto">¿Buscas optimizar tus operaciones? Conversa con un experto hoy mismo y descubre cómo Jhaz puede potenciar tu negocio.</p>
+    <div class="reveal-up" style="display:flex;justify-content:center">
+      <a href="https://wa.me/+51991913935?text=Hola%20Jhaz%2C%20quisiera%20una%20cotizaci%C3%B3n" target="_blank" class="cta-btn-wa">
+        <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.435 5.632 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Contactar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE → FAQ -->
+<div class="wave-divider" style="background:var(--navy)">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+    <path d="M0,0 C480,60 960,0 1440,60 L1440,0 Z" fill="#EDF2F7"/>
+  </svg>
+</div>
+
+<!-- ===== FAQ ===== -->
+<section class="section" style="background:var(--surface-100)">
   <div class="container" style="max-width:800px">
     <div style="text-align:center;margin-bottom:40px">
-      <h2 class="section-title" style="text-align:center">Preguntas Frecuentes</h2>
+      <h2 class="section-title reveal-clip" style="text-align:center"><span class="inner">Preguntas Frecuentes</span></h2>
       <p style="color:var(--t400);font-size:14px;margin-top:8px">Respuestas rápidas a las consultas más comunes</p>
     </div>
-    <div id="faq">
-      <div class="faq-item"><button class="faq-q">¿Qué incluye el servicio de transporte de Jhaz?<span class="faq-plus">+</span></button><div class="faq-a">Recojo en almacén, transporte con GPS, seguro de carga, factura electrónica, guía de remisión y acta de entrega digital. Para clientes con línea de crédito, el pago se consolida a 30 días en una sola factura.</div></div>
-      <div class="faq-item"><button class="faq-q">¿Cómo funciona el crédito a 30 días?<span class="faq-plus">+</span></button><div class="faq-a">Presentás ficha RUC, vigencia de poder, DNI del representante y dos referencias comerciales. En 72 horas aprobamos la línea sin garantías personales. Los envíos del mes se consolidan en una sola factura con vencimiento a 30 días.</div></div>
-      <div class="faq-item"><button class="faq-q">¿Tienen permiso para transportar carga MATPEL?<span class="faq-plus">+</span></button><div class="faq-a">Sí. Contamos con permiso MTC para materiales peligrosos (MATPEL) con protocolo y documentación específica. Conductores certificados para el manejo de estas cargas.</div></div>
-      <div class="faq-item"><button class="faq-q">¿Pueden ingresar a minas y proyectos especiales?<span class="faq-plus">+</span></button><div class="faq-a">Sí. Tenemos habilitación para ingresar a las principales operaciones: Quellaveco (Anglo American), Antapaccay, Refinería Talara y otros proyectos nacionales. También tenemos acceso a todos los almacenes del Callao.</div></div>
+    <div id="faqList">
+      <div class="faq-item reveal-up"><button class="faq-q">¿Qué incluye el servicio de transporte de Jhaz?<span class="faq-plus">+</span></button><div class="faq-a">Recojo en almacén, transporte con GPS, seguro de carga, factura electrónica, guía de remisión y acta de entrega digital. Para clientes con línea de crédito, el pago se consolida a 30 días en una sola factura.</div></div>
+      <div class="faq-item reveal-up"><button class="faq-q">¿Cómo funciona el crédito a 30 días?<span class="faq-plus">+</span></button><div class="faq-a">Presentás ficha RUC, vigencia de poder, DNI del representante y dos referencias comerciales. En 72 horas aprobamos la línea sin garantías personales. Los envíos del mes se consolidan en una sola factura con vencimiento a 30 días.</div></div>
+      <div class="faq-item reveal-up"><button class="faq-q">¿Tienen permiso para transportar carga MATPEL?<span class="faq-plus">+</span></button><div class="faq-a">Sí. Contamos con permiso MTC para materiales peligrosos (MATPEL) con protocolo específico. Conductores certificados para el manejo de estas cargas.</div></div>
+      <div class="faq-item reveal-up"><button class="faq-q">¿Pueden ingresar a minas y proyectos especiales?<span class="faq-plus">+</span></button><div class="faq-a">Sí. Tenemos habilitación para ingresar a Quellaveco (Anglo American), Antapaccay, Refinería Talara y otros proyectos nacionales. Acceso a todos los almacenes del Callao.</div></div>
     </div>
   </div>
 </section>
@@ -393,38 +878,15 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">Jhaz · Siempre Atentos</div>
-        <p class="footer-desc">Soluciones integrales de transporte, almacenamiento y distribución para el mercado peruano y global.</p>
+        <p class="footer-desc">Soluciones integrales de transporte y distribución para el mercado peruano y global.</p>
         <div class="footer-badge"><span class="footer-dot"></span>RNP Activo</div><br>
         <div class="footer-badge" style="margin-top:6px"><span class="footer-dot"></span>SUNAT · MTC vigente</div>
       </div>
-      <div class="footer-col"><h4>Servicios</h4><ul>
-        <li><a href="servicios.html">Transporte Nacional</a></li>
-        <li><a href="servicios.html">Carga Internacional</a></li>
-        <li><a href="servicios.html">Carga MATPEL</a></li>
-        <li><a href="servicios.html">Cama baja y plataformas</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Empresa</h4><ul>
-        <li><a href="nosotros.html">Nuestra Historia</a></li>
-        <li><a href="nosotros.html">Misión y Visión</a></li>
-        <li><a href="nosotros.html#proyectos">Proyectos</a></li>
-        <li><a href="portal.html">Portal del Cliente</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Contacto</h4><ul>
-        <li><a href="tel:+51991913935">+51 991 913 935</a></li>
-        <li><a href="tel:+51933428035">+51 933 428 035</a></li>
-        <li><a href="mailto:comercial@jhaz.com.pe">comercial@jhaz.com.pe</a></li>
-        <li><span style="color:rgba(255,255,255,.5);font-size:13px">San Miguel, Lima, Perú</span></li>
-        <li><span style="color:rgba(255,255,255,.5);font-size:13px">RUC 20600135261</span></li>
-      </ul></div>
+      <div class="footer-col"><h4>Servicios</h4><ul><li><a href="servicios.html">Transporte Nacional</a></li><li><a href="servicios.html">Carga Internacional</a></li><li><a href="servicios.html">Carga MATPEL</a></li><li><a href="servicios.html">Cama baja y plataformas</a></li></ul></div>
+      <div class="footer-col"><h4>Empresa</h4><ul><li><a href="nosotros.html">Nuestra Historia</a></li><li><a href="nosotros.html">Misión y Visión</a></li><li><a href="nosotros.html#proyectos">Proyectos</a></li><li><a href="portal.html">Portal del Cliente</a></li></ul></div>
+      <div class="footer-col"><h4>Contacto</h4><ul><li><a href="tel:+51991913935">+51 991 913 935</a></li><li><a href="tel:+51933428035">+51 933 428 035</a></li><li><a href="mailto:comercial@jhaz.com.pe">comercial@jhaz.com.pe</a></li><li><span style="color:rgba(255,255,255,.5);font-size:13px">San Miguel, Lima, Perú</span></li><li><span style="color:rgba(255,255,255,.5);font-size:13px">RUC 20600135261</span></li></ul></div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 Jhaz Operador Logístico S.A.C. Todos los derechos reservados.</span>
-      <div class="footer-bottom-links">
-        <a href="#">Términos y Condiciones</a>
-        <a href="#">Política de Privacidad</a>
-        <a href="#">Libro de Reclamaciones</a>
-      </div>
-    </div>
+    <div class="footer-bottom"><span>© 2026 Jhaz Operador Logístico S.A.C. Todos los derechos reservados.</span><div class="footer-bottom-links"><a href="#">Términos</a><a href="#">Privacidad</a><a href="#">Reclamaciones</a></div></div>
   </div>
 </footer>
 
@@ -433,34 +895,179 @@
 </a>
 
 <script>
-// Cotizador
-(function(){
-  var R={'Lima-Callao':[200,320],'Lima-Arequipa':[1400,1900],'Lima-Trujillo':[950,1400],'Lima-Piura':[1700,2200],'Lima-Cusco':[2000,2700],'Lima-Bolivia':[3500,5500],'Callao-Arequipa':[1500,2000]};
-  var V={'Menos de 1t':.7,'1 a 5t':1,'5 a 15t':1.9,'Más de 15t':3.5};
-  var T={'General':1,'MATPEL':1.5,'Sobredimensionada':1.8,'Contenedor':2.2};
-  document.getElementById('qf').addEventListener('submit',function(e){
-    e.preventDefault();
-    var o=document.getElementById('qo').value,d=document.getElementById('qd').value,t=document.getElementById('qt').value,v=document.getElementById('qv').value;
-    if(!o||!d||!t||!v)return;
-    var rng=R[o+'-'+d]||R[d+'-'+o]||[1200,1800];
-    var lo=Math.round(rng[0]*(V[v]||1)*(T[t]||1)/100)*100,hi=Math.round(rng[1]*(V[v]||1)*(T[t]||1)/100)*100;
-    document.getElementById('qrv').textContent='S/ '+lo.toLocaleString('es-PE')+' — S/ '+hi.toLocaleString('es-PE');
-    var r=document.getElementById('qr');r.classList.remove('show');requestAnimationFrame(function(){r.classList.add('show')});
+// ============================================================
+// CINEMATIC JS ENGINE
+// ============================================================
+(function() {
+
+// 1. SCROLL PROGRESS BAR
+var pb = document.getElementById('progressBar');
+function updateProgress() {
+  var max = document.documentElement.scrollHeight - window.innerHeight;
+  pb.style.width = (window.scrollY / max * 100) + '%';
+}
+
+// 2. HERO PARALLAX — background moves at 35% of scroll speed
+var heroBg = document.getElementById('heroBg') || document.querySelector('.hero-bg');
+function updateHeroParallax() {
+  if (!heroBg) return;
+  var y = window.scrollY * 0.35;
+  heroBg.style.transform = 'translateY(' + y + 'px)';
+}
+
+// 3. IMAGE PARALLAX — for parallax-img elements
+var parallaxImgs = document.querySelectorAll('[data-parallax]');
+function updateImgParallax() {
+  parallaxImgs.forEach(function(img) {
+    var rect = img.closest('.bento-photo, .parallax-wrap').getBoundingClientRect();
+    var center = rect.top + rect.height / 2 - window.innerHeight / 2;
+    var offset = center * 0.12;
+    img.style.transform = 'scale(1.12) translateY(' + offset + 'px)';
   });
-})();
-// FAQ
-document.querySelectorAll('.faq-q').forEach(function(b){
-  b.addEventListener('click',function(){
-    var i=b.closest('.faq-item'),o=i.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(function(x){x.classList.remove('open')});
-    if(!o)i.classList.add('open');
+}
+
+// RAF-throttled scroll handler
+var ticking = false;
+window.addEventListener('scroll', function() {
+  if (!ticking) {
+    requestAnimationFrame(function() {
+      updateProgress();
+      updateHeroParallax();
+      updateImgParallax();
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+// 4. HERO ENTRANCE ANIMATIONS
+window.addEventListener('load', function() {
+  // Image fade in
+  var img = document.getElementById('heroBgImg');
+  if (img) img.classList.add('loaded');
+
+  // Staggered hero elements
+  setTimeout(function() { var e = document.getElementById('heroEye'); if(e) e.classList.add('fired'); }, 200);
+  setTimeout(function() {
+    ['hLine1','hLine2','hLine3'].forEach(function(id, i) {
+      setTimeout(function() { var e = document.getElementById(id); if(e) e.classList.add('fired'); }, i * 120);
+    });
+  }, 400);
+  setTimeout(function() { var e = document.getElementById('heroSub'); if(e) e.classList.add('fired'); }, 800);
+  setTimeout(function() { var e = document.getElementById('heroBtns'); if(e) e.classList.add('fired'); }, 1000);
+  setTimeout(function() { var e = document.getElementById('heroTrust'); if(e) e.classList.add('fired'); }, 1100);
+  setTimeout(function() { var e = document.getElementById('qcard'); if(e) e.classList.add('fired'); }, 600);
+});
+
+// 5. INTERSECTION OBSERVER — scroll reveals
+if ('IntersectionObserver' in window) {
+  var ioUp = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        var siblings = [].slice.call(e.target.parentElement.querySelectorAll('.reveal-up'));
+        var idx = siblings.indexOf(e.target);
+        e.target.style.transitionDelay = Math.min(idx * 90, 360) + 'ms';
+        e.target.classList.add('in');
+        ioUp.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  var ioClip = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        ioClip.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.reveal-up').forEach(function(el) { ioUp.observe(el); });
+  document.querySelectorAll('.reveal-clip').forEach(function(el) { ioClip.observe(el); });
+}
+
+// 6. COUNT-UP ANIMATION for stats
+function animateCount(el, target, suffix, duration) {
+  var start = 0, step = duration / 60;
+  var inc = target / (duration / (1000 / 60));
+  var id = setInterval(function() {
+    start += inc;
+    if (start >= target) { start = target; clearInterval(id); }
+    el.textContent = Math.floor(start) + suffix;
+  }, step);
+}
+
+var statsObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('[data-count]').forEach(function(el) {
+        animateCount(el, +el.dataset.count, el.dataset.suffix || '', 1800);
+      });
+      statsObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.sgrid').forEach(function(el) { statsObserver.observe(el); });
+
+// 7. FLOATING PARTICLES
+function createParticles(containerId) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  for (var i = 0; i < 12; i++) {
+    (function(i) {
+      var p = document.createElement('div');
+      p.className = 'particle';
+      var size = Math.random() * 4 + 2;
+      p.style.cssText = [
+        'width:' + size + 'px',
+        'height:' + size + 'px',
+        'left:' + (Math.random() * 100) + '%',
+        'bottom:' + (Math.random() * 30) + 'px',
+        'animation-duration:' + (Math.random() * 4 + 3) + 's',
+        'animation-delay:' + (Math.random() * 4) + 's'
+      ].join(';');
+      container.appendChild(p);
+    })(i);
+  }
+}
+createParticles('particles');
+createParticles('ctaParticles');
+
+// 8. FAQ
+document.querySelectorAll('.faq-q').forEach(function(b) {
+  b.addEventListener('click', function() {
+    var item = b.closest('.faq-item');
+    var open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(x) { x.classList.remove('open'); });
+    if (!open) item.classList.add('open');
   });
 });
-// Reveal
-(function(){
-  if(!('IntersectionObserver' in window)){document.querySelectorAll('.rev').forEach(function(e){e.classList.add('in')});return}
-  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var s=[].slice.call(e.target.parentElement.querySelectorAll('.rev'));e.target.style.transitionDelay=Math.min(s.indexOf(e.target)*80,280)+'ms';e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.rev').forEach(function(e){io.observe(e)});
+
+// 9. QUOTE CALCULATOR
+var R={'Lima-Callao':[200,320],'Lima-Arequipa':[1400,1900],'Lima-Trujillo':[950,1400],'Lima-Piura':[1700,2200],'Lima-Cusco':[2000,2700],'Lima-Bolivia':[3500,5500],'Callao-Arequipa':[1500,2000]};
+var V={'Menos de 1t':.7,'1 a 5t':1,'5 a 15t':1.9,'Más de 15t':3.5};
+var T={'General':1,'MATPEL':1.5,'Sobredimensionada':1.8,'Contenedor':2.2};
+var form = document.getElementById('qf');
+if (form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var o=document.getElementById('qo').value, d=document.getElementById('qd').value,
+        t=document.getElementById('qt').value, v=document.getElementById('qv').value;
+    if (!o||!d||!t||!v) return;
+    var rng = R[o+'-'+d]||R[d+'-'+o]||[1200,1800];
+    var lo=Math.round(rng[0]*(V[v]||1)*(T[t]||1)/100)*100,
+        hi=Math.round(rng[1]*(V[v]||1)*(T[t]||1)/100)*100;
+    document.getElementById('qrv').textContent='S/ '+lo.toLocaleString('es-PE')+' — S/ '+hi.toLocaleString('es-PE');
+    var r=document.getElementById('qr');
+    r.classList.remove('show');
+    requestAnimationFrame(function(){r.classList.add('show');});
+  });
+}
+
+// Initial calls
+updateProgress();
+updateImgParallax();
+
 })();
 </script>
 </body>
