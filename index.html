@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Jhaz Operador Logístico S.A.C.","slogan":"Siempre Atentos","url":"https://jhaz.com.pe","telephone":["+51991913935","+51933428035"],"email":"comercial@jhaz.com.pe","address":{"@type":"PostalAddress","addressLocality":"San Miguel","addressRegion":"Lima","addressCountry":"PE"},"foundingDate":"2015","vatID":"20600135261"}</script>
 
 <style>
@@ -25,6 +26,117 @@
   animation: shimmer 2s linear infinite;
 }
 @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* === CUSTOM CURSOR === */
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .25s, height .25s, background .25s;
+  will-change: transform;
+}
+.cursor-ring {
+  width: 38px; height: 38px;
+  border: 1.5px solid rgba(246,173,85,.5);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width .35s cubic-bezier(.25,.46,.45,.94),
+              height .35s cubic-bezier(.25,.46,.45,.94),
+              border-color .25s, background .25s;
+  will-change: transform;
+}
+.cursor-dot.hovered { width: 12px; height: 12px; background: #fff; }
+.cursor-ring.hovered { width: 56px; height: 56px; border-color: rgba(246,173,85,.25); background: rgba(246,173,85,.06); }
+.cursor-dot.clicked { transform: translate(-50%,-50%) scale(.6); }
+.cursor-ring.clicked { transform: translate(-50%,-50%) scale(.85); }
+@media(hover:none){ .cursor-dot,.cursor-ring{ display:none; } }
+
+/* === WORD-BY-WORD HERO === */
+.word-wrap { overflow: hidden; display: inline-block; vertical-align: bottom; }
+.word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Orange gradient animated text */
+.hero-gradient-text {
+  background: linear-gradient(135deg, var(--orange) 0%, #fff5 50%, var(--orange) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShine 4s linear infinite;
+}
+@keyframes textShine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* === MAGNETIC BUTTON === */
+.mag-btn { transition: transform .4s cubic-bezier(.25,.46,.45,.94), box-shadow .3s ease !important; }
+.mag-btn:hover { box-shadow: 0 20px 60px rgba(232,149,10,.4) !important; }
+
+/* === GLOW PULSE on orange buttons === */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,149,10,.4); }
+  50% { box-shadow: 0 0 32px 8px rgba(232,149,10,.25); }
+}
+.btn-orange, .nav-cta, .cta-btn-wa {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* === 3D TILT on project cards === */
+.proj-card {
+  transform-style: preserve-3d;
+  transition: transform .15s ease, box-shadow .3s ease !important;
+}
+.proj-card:hover {
+  box-shadow: 0 32px 64px rgba(0,0,0,.35) !important;
+}
+
+/* === COUNTER numbers === */
+.count-num {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* === FLOATING TRUST BADGES === */
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.trust-item:nth-child(1) { animation: floatBadge 3.5s ease-in-out infinite; }
+.trust-item:nth-child(2) { animation: floatBadge 3.5s ease-in-out infinite .5s; }
+.trust-item:nth-child(3) { animation: floatBadge 3.5s ease-in-out infinite 1s; }
+.trust-item:nth-child(4) { animation: floatBadge 3.5s ease-in-out infinite 1.5s; }
+
+/* === STAGGER REVEAL === */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(28px);
+  will-change: transform, opacity;
+}
+
+/* === LINE DRAW on section tags === */
+.section-tag { position: relative; }
+.section-tag::before {
+  transform-origin: left;
+  animation: none;
+}
+.section-tag.drawn::before {
+  animation: lineGrow .6s cubic-bezier(.76,0,.24,1) forwards;
+}
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
 
 /* === HERO CINEMATIC === */
 .hero {
@@ -477,6 +589,10 @@
 <!-- SCROLL PROGRESS BAR -->
 <div class="progress-bar" id="progressBar"></div>
 
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
 <!-- NAV -->
 <header class="nav">
   <div class="nav-inner">
@@ -513,16 +629,20 @@
     <div>
       <div class="hero-eye" id="heroEye">Siempre Atentos · Lima, Perú</div>
 
-      <div style="margin-bottom:20px">
-        <div class="c-reveal" id="hLine1">
-          <div><h1 style="margin-bottom:0">Jhaz Operador Logístico:</h1></div>
-        </div>
-        <div class="c-reveal" id="hLine2" style="transition-delay:.15s">
-          <div><h1 style="margin-bottom:0"><span>Conectando tu carga</span></h1></div>
-        </div>
-        <div class="c-reveal" id="hLine3" style="transition-delay:.25s">
-          <div><h1>con el mundo</h1></div>
-        </div>
+      <div style="margin-bottom:20px" id="heroTitle">
+        <h1 id="h1text" style="line-height:1.05;margin-bottom:0">
+          <span class="word-wrap"><span class="word-inner" id="w0">Jhaz</span></span>
+          <span class="word-wrap"><span class="word-inner" id="w1">Operador</span></span>
+          <span class="word-wrap"><span class="word-inner" id="w2">Logístico:</span></span><br>
+          <span class="hero-gradient-text">
+            <span class="word-wrap"><span class="word-inner" id="w3">Conectando</span></span>
+            <span class="word-wrap"><span class="word-inner" id="w4">tu</span></span>
+            <span class="word-wrap"><span class="word-inner" id="w5">carga</span></span>
+          </span><br>
+          <span class="word-wrap"><span class="word-inner" id="w6">con</span></span>
+          <span class="word-wrap"><span class="word-inner" id="w7">el</span></span>
+          <span class="word-wrap"><span class="word-inner" id="w8">mundo</span></span>
+        </h1>
       </div>
 
       <p class="hero-sub" id="heroSub">
@@ -530,8 +650,8 @@
       </p>
 
       <div class="hero-btns" id="heroBtns" style="margin:24px 0 32px">
-        <a href="contacto.html" class="btn" style="background:var(--orange);color:#fff;padding:14px 28px;font-size:15px">Solicitar Cotización →</a>
-        <a href="servicios.html" class="btn" style="border:2px solid rgba(255,255,255,.3);color:#fff;padding:14px 24px;font-size:15px">Ver Servicios</a>
+        <a href="contacto.html" class="btn mag-btn" style="background:var(--orange);color:#fff;padding:14px 28px;font-size:15px">Solicitar Cotización →</a>
+        <a href="servicios.html" class="btn mag-btn" style="border:2px solid rgba(255,255,255,.3);color:#fff;padding:14px 24px;font-size:15px">Ver Servicios</a>
       </div>
 
       <div class="hero-trust" id="heroTrust">
@@ -896,157 +1016,307 @@
 
 <script>
 // ============================================================
-// CINEMATIC JS ENGINE
+// JHAZ — ANIMATION ENGINE v2 · Powered by Anime.js
+// Efectos: Cursor · Word-by-word · Magnetic · Counter ·
+//          3D Tilt · Parallax · Section reveals · Particles
 // ============================================================
 (function() {
 
-// 1. SCROLL PROGRESS BAR
+// ─── 1. CUSTOM CURSOR ────────────────────────────────────────
+var dot  = document.getElementById('cursorDot');
+var ring = document.getElementById('cursorRing');
+var mx = -100, my = -100, rx = -100, ry = -100;
+var dotX = -100, dotY = -100;
+
+if (dot && ring && window.matchMedia('(hover:hover)').matches) {
+  document.addEventListener('mousemove', function(e) {
+    mx = e.clientX; my = e.clientY;
+    // Dot follows instantly
+    dot.style.transform = 'translate(' + (mx-4) + 'px,' + (my-4) + 'px)';
+  });
+  // Ring follows with lag (RAF loop)
+  (function loop() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = 'translate(' + (rx-19) + 'px,' + (ry-19) + 'px)';
+    requestAnimationFrame(loop);
+  })();
+
+  // Hover state on interactive elements
+  document.querySelectorAll('a,button,.proj-card,.card,.value-card').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { dot.classList.add('hovered'); ring.classList.add('hovered'); });
+    el.addEventListener('mouseleave', function() { dot.classList.remove('hovered'); ring.classList.remove('hovered'); });
+  });
+  document.addEventListener('mousedown', function() { dot.classList.add('clicked'); ring.classList.add('clicked'); });
+  document.addEventListener('mouseup',   function() { dot.classList.remove('clicked'); ring.classList.remove('clicked'); });
+}
+
+// ─── 2. SCROLL PROGRESS BAR ──────────────────────────────────
 var pb = document.getElementById('progressBar');
 function updateProgress() {
   var max = document.documentElement.scrollHeight - window.innerHeight;
-  pb.style.width = (window.scrollY / max * 100) + '%';
+  if (pb) pb.style.width = (window.scrollY / max * 100) + '%';
 }
 
-// 2. HERO PARALLAX — background moves at 35% of scroll speed
-var heroBg = document.getElementById('heroBg') || document.querySelector('.hero-bg');
+// ─── 3. HERO PARALLAX ────────────────────────────────────────
+var heroBg = document.querySelector('.hero-bg');
 function updateHeroParallax() {
-  if (!heroBg) return;
-  var y = window.scrollY * 0.35;
-  heroBg.style.transform = 'translateY(' + y + 'px)';
+  if (heroBg && window.scrollY < window.innerHeight * 1.2)
+    heroBg.style.transform = 'translateY(' + (window.scrollY * 0.32) + 'px)';
 }
 
-// 3. IMAGE PARALLAX — for parallax-img elements
+// ─── 4. IMAGE PARALLAX ───────────────────────────────────────
 var parallaxImgs = document.querySelectorAll('[data-parallax]');
 function updateImgParallax() {
   parallaxImgs.forEach(function(img) {
-    var rect = img.closest('.bento-photo, .parallax-wrap').getBoundingClientRect();
-    var center = rect.top + rect.height / 2 - window.innerHeight / 2;
-    var offset = center * 0.12;
+    var wrap = img.closest('.bento-photo') || img.closest('.parallax-wrap');
+    if (!wrap) return;
+    var rect = wrap.getBoundingClientRect();
+    var offset = (window.innerHeight / 2 - (rect.top + rect.height / 2)) * 0.14;
     img.style.transform = 'scale(1.12) translateY(' + offset + 'px)';
   });
 }
 
-// RAF-throttled scroll handler
+// RAF scroll handler
 var ticking = false;
 window.addEventListener('scroll', function() {
   if (!ticking) {
     requestAnimationFrame(function() {
-      updateProgress();
-      updateHeroParallax();
-      updateImgParallax();
+      updateProgress(); updateHeroParallax(); updateImgParallax();
       ticking = false;
     });
     ticking = true;
   }
 }, { passive: true });
 
-// 4. HERO ENTRANCE ANIMATIONS
+// ─── 5. HERO ENTRANCE — word by word with Anime.js ───────────
 window.addEventListener('load', function() {
   // Image fade in
   var img = document.getElementById('heroBgImg');
   if (img) img.classList.add('loaded');
 
-  // Staggered hero elements
-  setTimeout(function() { var e = document.getElementById('heroEye'); if(e) e.classList.add('fired'); }, 200);
+  // Quote card entrance
   setTimeout(function() {
-    ['hLine1','hLine2','hLine3'].forEach(function(id, i) {
-      setTimeout(function() { var e = document.getElementById(id); if(e) e.classList.add('fired'); }, i * 120);
+    var qc = document.getElementById('qcard');
+    if (qc) qc.classList.add('fired');
+  }, 300);
+
+  if (typeof anime === 'undefined') {
+    // Fallback if anime.js didn't load
+    ['heroEye','heroSub','heroBtns','heroTrust'].forEach(function(id) {
+      var el = document.getElementById(id); if(el) el.classList.add('fired');
     });
-  }, 400);
-  setTimeout(function() { var e = document.getElementById('heroSub'); if(e) e.classList.add('fired'); }, 800);
-  setTimeout(function() { var e = document.getElementById('heroBtns'); if(e) e.classList.add('fired'); }, 1000);
-  setTimeout(function() { var e = document.getElementById('heroTrust'); if(e) e.classList.add('fired'); }, 1100);
-  setTimeout(function() { var e = document.getElementById('qcard'); if(e) e.classList.add('fired'); }, 600);
+    document.querySelectorAll('.word-inner').forEach(function(w) {
+      w.style.opacity = 1; w.style.transform = 'none';
+    });
+    return;
+  }
+
+  // Anime.js timeline
+  var tl = anime.timeline({ easing: 'cubicBezier(.76,0,.24,1)' });
+
+  // Eyebrow line
+  tl.add({
+    targets: '#heroEye',
+    opacity: [0, 1],
+    translateX: [-24, 0],
+    duration: 700,
+    complete: function() { document.getElementById('heroEye').classList.add('fired'); }
+  });
+
+  // Words: staggered from bottom
+  tl.add({
+    targets: '.word-inner',
+    translateY: ['110%', '0%'],
+    opacity: [0, 1],
+    duration: 700,
+    delay: anime.stagger(60),
+    easing: 'cubicBezier(.76,0,.24,1)'
+  }, '-=400');
+
+  // Sub text
+  tl.add({
+    targets: '#heroSub',
+    opacity: [0, 1],
+    translateY: [16, 0],
+    duration: 600,
+    begin: function() { document.getElementById('heroSub').classList.add('fired'); }
+  }, '-=300');
+
+  // Buttons
+  tl.add({
+    targets: '#heroBtns',
+    opacity: [0, 1],
+    translateY: [16, 0],
+    duration: 500,
+    begin: function() { document.getElementById('heroBtns').classList.add('fired'); }
+  }, '-=350');
+
+  // Trust badges
+  tl.add({
+    targets: '#heroTrust',
+    opacity: [0, 1],
+    duration: 500,
+    begin: function() { document.getElementById('heroTrust').classList.add('fired'); }
+  }, '-=300');
 });
 
-// 5. INTERSECTION OBSERVER — scroll reveals
+// ─── 6. MAGNETIC BUTTONS ─────────────────────────────────────
+document.querySelectorAll('.mag-btn').forEach(function(btn) {
+  btn.addEventListener('mousemove', function(e) {
+    var rect = btn.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var dx = (e.clientX - cx) * 0.28;
+    var dy = (e.clientY - cy) * 0.28;
+    btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(1.04)';
+  });
+  btn.addEventListener('mouseleave', function() {
+    if (typeof anime !== 'undefined') {
+      anime({ targets: btn, translateX: 0, translateY: 0, scale: 1, duration: 500, easing: 'spring(1,80,10,0)' });
+    } else {
+      btn.style.transform = '';
+    }
+  });
+});
+
+// ─── 7. SCROLL REVEALS with Anime.js stagger ─────────────────
 if ('IntersectionObserver' in window) {
+  // reveal-up: Anime.js staggered entrance
   var ioUp = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        var siblings = [].slice.call(e.target.parentElement.querySelectorAll('.reveal-up'));
-        var idx = siblings.indexOf(e.target);
-        e.target.style.transitionDelay = Math.min(idx * 90, 360) + 'ms';
-        e.target.classList.add('in');
-        ioUp.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      if (!e.isIntersecting) return;
+      var siblings = [].slice.call(e.target.parentElement.querySelectorAll('.reveal-up'));
+      var idx = siblings.indexOf(e.target);
 
+      if (typeof anime !== 'undefined') {
+        anime({
+          targets: e.target,
+          opacity: [0, 1],
+          translateY: [32, 0],
+          duration: 800,
+          delay: Math.min(idx * 80, 300),
+          easing: 'cubicBezier(.76,0,.24,1)'
+        });
+      } else {
+        e.target.style.transitionDelay = Math.min(idx * 80, 300) + 'ms';
+        e.target.classList.add('in');
+      }
+      ioUp.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+  // reveal-clip: text slides up
   var ioClip = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        ioClip.unobserve(e.target);
-      }
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      // Also draw section tag lines
+      var tag = e.target.previousElementSibling;
+      if (tag && tag.classList.contains('section-tag')) tag.classList.add('drawn');
+      ioClip.unobserve(e.target);
     });
   }, { threshold: 0.2 });
 
+  // Section tags line draw
+  var ioTag = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('drawn'); ioTag.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+
   document.querySelectorAll('.reveal-up').forEach(function(el) { ioUp.observe(el); });
   document.querySelectorAll('.reveal-clip').forEach(function(el) { ioClip.observe(el); });
+  document.querySelectorAll('.section-tag').forEach(function(el) { ioTag.observe(el); });
 }
 
-// 6. COUNT-UP ANIMATION for stats
-function animateCount(el, target, suffix, duration) {
-  var start = 0, step = duration / 60;
-  var inc = target / (duration / (1000 / 60));
-  var id = setInterval(function() {
-    start += inc;
-    if (start >= target) { start = target; clearInterval(id); }
-    el.textContent = Math.floor(start) + suffix;
-  }, step);
-}
-
+// ─── 8. COUNT-UP with Anime.js ───────────────────────────────
 var statsObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('[data-count]').forEach(function(el) {
-        animateCount(el, +el.dataset.count, el.dataset.suffix || '', 1800);
+    if (!e.isIntersecting) return;
+    if (typeof anime !== 'undefined') {
+      // Animate the whole stat number
+      e.target.querySelectorAll('.snum').forEach(function(el, i) {
+        var text = el.textContent.replace(/[^0-9]/g,'');
+        var target = parseInt(text) || 0;
+        var suffix = el.textContent.replace(/[0-9]/g,'');
+        if (!target) return;
+        anime({
+          targets: { val: 0 },
+          val: target,
+          delay: i * 150,
+          duration: 2000,
+          easing: 'easeOutExpo',
+          update: function(anim) {
+            var v = Math.floor(anim.animations[0].currentValue);
+            el.innerHTML = v + '<sup>' + suffix + '</sup>';
+          }
+        });
+        // Scale entrance
+        anime({ targets: el, scale: [0.5, 1], opacity: [0, 1], duration: 800, delay: i * 150, easing: 'spring(1,80,10,0)' });
       });
-      statsObserver.unobserve(e.target);
+    }
+    statsObserver.unobserve(e.target);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.sband, .sgrid').forEach(function(el) { statsObserver.observe(el); });
+
+// ─── 9. 3D TILT on project cards ─────────────────────────────
+document.querySelectorAll('.proj-card').forEach(function(card) {
+  card.addEventListener('mousemove', function(e) {
+    var rect = card.getBoundingClientRect();
+    var x = (e.clientX - rect.left) / rect.width  - 0.5;
+    var y = (e.clientY - rect.top)  / rect.height - 0.5;
+    card.style.transform = [
+      'perspective(600px)',
+      'rotateX(' + (-y * 12) + 'deg)',
+      'rotateY(' + (x * 12) + 'deg)',
+      'scale3d(1.04,1.04,1.04)'
+    ].join(' ');
+  });
+  card.addEventListener('mouseleave', function() {
+    if (typeof anime !== 'undefined') {
+      anime({ targets: card, rotateX: 0, rotateY: 0, scale: 1, duration: 500, easing: 'spring(1,80,10,0)' });
+    } else {
+      card.style.transform = '';
     }
   });
-}, { threshold: 0.4 });
-document.querySelectorAll('.sgrid').forEach(function(el) { statsObserver.observe(el); });
+});
 
-// 7. FLOATING PARTICLES
-function createParticles(containerId) {
-  var container = document.getElementById(containerId);
-  if (!container) return;
-  for (var i = 0; i < 12; i++) {
-    (function(i) {
-      var p = document.createElement('div');
-      p.className = 'particle';
-      var size = Math.random() * 4 + 2;
-      p.style.cssText = [
-        'width:' + size + 'px',
-        'height:' + size + 'px',
-        'left:' + (Math.random() * 100) + '%',
-        'bottom:' + (Math.random() * 30) + 'px',
-        'animation-duration:' + (Math.random() * 4 + 3) + 's',
-        'animation-delay:' + (Math.random() * 4) + 's'
-      ].join(';');
-      container.appendChild(p);
-    })(i);
+// ─── 10. FLOATING PARTICLES ──────────────────────────────────
+function createParticles(id) {
+  var c = document.getElementById(id);
+  if (!c) return;
+  for (var i = 0; i < 14; i++) {
+    var p = document.createElement('div');
+    p.className = 'particle';
+    var s = Math.random() * 4 + 2;
+    p.style.cssText = 'width:'+s+'px;height:'+s+'px;left:'+(Math.random()*100)+'%;bottom:'+(Math.random()*40)+'px;animation-duration:'+(Math.random()*4+3)+'s;animation-delay:'+(Math.random()*5)+'s';
+    c.appendChild(p);
   }
 }
 createParticles('particles');
 createParticles('ctaParticles');
 
-// 8. FAQ
+// ─── 11. FAQ ─────────────────────────────────────────────────
 document.querySelectorAll('.faq-q').forEach(function(b) {
   b.addEventListener('click', function() {
     var item = b.closest('.faq-item');
     var open = item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(function(x) { x.classList.remove('open'); });
-    if (!open) item.classList.add('open');
+    if (!open) {
+      item.classList.add('open');
+      if (typeof anime !== 'undefined') {
+        anime({ targets: b.querySelector('.faq-plus'), rotate: open ? 0 : 45, duration: 300, easing: 'cubicBezier(.76,0,.24,1)' });
+      }
+    }
   });
 });
 
-// 9. QUOTE CALCULATOR
-var R={'Lima-Callao':[200,320],'Lima-Arequipa':[1400,1900],'Lima-Trujillo':[950,1400],'Lima-Piura':[1700,2200],'Lima-Cusco':[2000,2700],'Lima-Bolivia':[3500,5500],'Callao-Arequipa':[1500,2000]};
-var V={'Menos de 1t':.7,'1 a 5t':1,'5 a 15t':1.9,'Más de 15t':3.5};
-var T={'General':1,'MATPEL':1.5,'Sobredimensionada':1.8,'Contenedor':2.2};
+// ─── 12. QUOTE CALCULATOR ────────────────────────────────────
+var R = {'Lima-Callao':[200,320],'Lima-Arequipa':[1400,1900],'Lima-Trujillo':[950,1400],'Lima-Piura':[1700,2200],'Lima-Cusco':[2000,2700],'Lima-Bolivia':[3500,5500],'Callao-Arequipa':[1500,2000]};
+var V = {'Menos de 1t':.7,'1 a 5t':1,'5 a 15t':1.9,'Más de 15t':3.5};
+var T = {'General':1,'MATPEL':1.5,'Sobredimensionada':1.8,'Contenedor':2.2};
 var form = document.getElementById('qf');
 if (form) {
   form.addEventListener('submit', function(e) {
@@ -1054,17 +1324,17 @@ if (form) {
     var o=document.getElementById('qo').value, d=document.getElementById('qd').value,
         t=document.getElementById('qt').value, v=document.getElementById('qv').value;
     if (!o||!d||!t||!v) return;
-    var rng = R[o+'-'+d]||R[d+'-'+o]||[1200,1800];
-    var lo=Math.round(rng[0]*(V[v]||1)*(T[t]||1)/100)*100,
-        hi=Math.round(rng[1]*(V[v]||1)*(T[t]||1)/100)*100;
-    document.getElementById('qrv').textContent='S/ '+lo.toLocaleString('es-PE')+' — S/ '+hi.toLocaleString('es-PE');
-    var r=document.getElementById('qr');
+    var rng = R[o+'-'+d] || R[d+'-'+o] || [1200,1800];
+    var lo = Math.round(rng[0]*(V[v]||1)*(T[t]||1)/100)*100;
+    var hi = Math.round(rng[1]*(V[v]||1)*(T[t]||1)/100)*100;
+    document.getElementById('qrv').textContent = 'S/ '+lo.toLocaleString('es-PE')+' — S/ '+hi.toLocaleString('es-PE');
+    var r = document.getElementById('qr');
     r.classList.remove('show');
-    requestAnimationFrame(function(){r.classList.add('show');});
+    requestAnimationFrame(function() { r.classList.add('show'); });
   });
 }
 
-// Initial calls
+// Init
 updateProgress();
 updateImgParallax();
 
