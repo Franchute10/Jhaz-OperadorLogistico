@@ -293,7 +293,6 @@ body{font-family:'Inter',sans-serif}
         Ingresar
       </button>
     </div>
-    <p class="text-xs text-steel-gray mt-4">Código por defecto: <code class="bg-surface-container px-1 rounded">JHAZ2026</code><br/>Cámbialo en el archivo HTML</p>
   </div>
 </div>
 
@@ -309,6 +308,7 @@ body{font-family:'Inter',sans-serif}
       </div>
     </div>
     <div class="flex items-center gap-3">
+      <button onclick="showReqList()" class="text-white/70 hover:text-white text-xs border border-white/20 px-3 py-1.5 rounded-lg">📥 Solicitudes</button>
       <button onclick="newQuote()" class="text-white/70 hover:text-white text-xs border border-white/20 px-3 py-1.5 rounded-lg">+ Nueva</button>
       <button onclick="document.getElementById('system-modal').classList.add('hidden')" class="text-white/70 hover:text-white">
         <span class="material-symbols-outlined">close</span>
@@ -335,16 +335,16 @@ body{font-family:'Inter',sans-serif}
 
     <!-- STEP 0: REQUERIMIENTO -->
     <div id="ss0">
-      <!-- Prefill notice (shown when data comes from public form) -->
-      <div id="prefill-notice" class="hidden bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4 flex items-start gap-3">
-        <span class="material-symbols-outlined text-blue-600 mt-0.5" style="font-size:20px">info</span>
-        <div>
-          <p class="text-sm font-semibold text-blue-800">Datos del formulario del cliente cargados</p>
-          <p class="text-xs text-blue-600 mt-1">Revisa y completa los campos que faltan antes de enviar a Operaciones.</p>
-        </div>
       </div>
 
-      <div class="bg-white border border-outline-variant rounded-xl p-5 mb-3">
+      <!-- Panel: cargar solicitud guardada (solo funciona mismo dispositivo) -->
+      <div id="load-panel" class="hidden bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4">
+        <p class="text-xs font-bold text-amber-800 uppercase tracking-widest mb-3">📥 Solicitudes guardadas en este equipo</p>
+        <div id="req-list" class="flex flex-col gap-2 max-h-48 overflow-y-auto"></div>
+        <p class="text-xs text-amber-700 mt-3">⚠️ Solo aparecen solicitudes enviadas desde <strong>este navegador</strong>. Las del cliente llegan por email de Formspree.</p>
+        <button onclick="document.getElementById('load-panel').classList.add('hidden')" class="mt-2 text-xs text-amber-700 underline">Cerrar</button>
+      </div>
+            <div class="bg-white border border-outline-variant rounded-xl p-5 mb-3">
         <p class="text-xs font-bold text-steel-gray uppercase tracking-widest mb-4">👤 Datos del requerimiento</p>
         <div class="grid grid-cols-2 gap-3">
           <div class="sys-field"><label class="sys-label">N° Propuesta</label><input class="sys-input" id="s_prop" value="051"/></div>
@@ -485,7 +485,7 @@ body{font-family:'Inter',sans-serif}
 <script>
 // ═══ CONFIG — CAMBIA AQUÍ ═══
 const ACCESS_PIN = "JHAZ2026";  // ← Cambia este PIN
-const FORMSPREE_ID = "xaqknqkw";  // ← Reemplaza con tu ID de Formspree (formspree.io)
+const FORMSPREE_ID = "YOUR_FORMSPREE_ID";  // ← Reemplaza con tu ID de Formspree (formspree.io)
 // ════════════════════════════
 
 const months=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
@@ -506,24 +506,6 @@ function checkPin(){
     document.getElementById("pin-error").classList.add("hidden");
     sysGoTo(0);
     // Check if there's pending data from public form
-    const pending=sessionStorage.getItem("jhaz_pending");
-    if(pending){
-      try{
-        const d=JSON.parse(pending);
-        document.getElementById("s_cli").value=d.empresa||"";
-        document.getElementById("s_ate").value=d.nombre||"";
-        document.getElementById("s_ori").value=d.origen||"";
-        document.getElementById("s_dst").value=d.destino||"";
-        document.getElementById("s_car").value=d.carga||"";
-        document.getElementById("s_pes").value=d.peso||"";
-        document.getElementById("s_can").value=d.cant||"1";
-        document.getElementById("s_fec").value=d.fecha||"";
-        document.getElementById("s_add").value=d.notas||"";
-        if(d.servicio)document.getElementById("s_uni").value="Tracto T3";
-        document.getElementById("prefill-notice").classList.remove("hidden");
-        sessionStorage.removeItem("jhaz_pending");
-      }catch(e){}
-    }
     updateSysHeader();
   }else{
     document.getElementById("pin-error").classList.remove("hidden");
@@ -539,8 +521,13 @@ async function submitForm(e){
   const destino=gv("pub_destino"),carga=gv("pub_carga"),peso=gv("pub_peso");
   const cant=gv("pub_cant"),fecha=gv("pub_fecha"),valor=gv("pub_valor"),notas=gv("pub_notas");
 
-  // Save to session for internal system prefill
-  sessionStorage.setItem("jhaz_pending",JSON.stringify({nombre,empresa,origen,destino,carga,peso,cant,fecha,notas,servicio}));
+  // Save to localStorage with timestamp (only works same device)
+  const entry={ts:new Date().toISOString(),nombre,empresa,origen,destino,carga,peso,cant,fecha,notas,servicio,tel,email,valor};
+  try{
+    const all=JSON.parse(localStorage.getItem("jhaz_requests")||"[]");
+    all.unshift(entry);
+    localStorage.setItem("jhaz_requests",JSON.stringify(all.slice(0,20)));
+  }catch(e){}
   sessionStorage.setItem("jhaz_wa_client",`📦 *NUEVA SOLICITUD DE COTIZACIÓN*\n\n👤 ${nombre} | ${empresa}\n📱 ${tel}${email?" | "+email:""}\n\n🚛 Servicio: ${servicio||"No especificado"}\n📍 ${origen} → ${destino}\n📦 ${carga||"No especificado"} | ${peso?peso+" TN":""} | ${cant?cant+" und.":""}\n📅 Fecha: ${fecha||"No especificada"}\n💰 Valor carga: ${valor?"USD "+valor:"No especificado"}\n${notas?"📝 "+notas:""}\n\nRespuesta esperada en 2h — Frank Espinoza 933-428-035`);
 
   // Send via Formspree (or show success directly if not configured)
@@ -731,6 +718,43 @@ function newQuote(){
   document.getElementById("prefill-notice").classList.add("hidden");
   sysGoTo(0);updateSysHeader();
 }
+
+function showReqList(){
+  const all=JSON.parse(localStorage.getItem("jhaz_requests")||"[]");
+  const panel=document.getElementById("load-panel");
+  const list=document.getElementById("req-list");
+  if(!all.length){
+    list.innerHTML='<p class="text-xs text-amber-700">No hay solicitudes guardadas en este equipo.</p>';
+  }else{
+    list.innerHTML=all.map((r,i)=>`
+      <div class="bg-white rounded-lg border border-amber-200 p-3 flex items-start justify-between gap-3">
+        <div>
+          <p class="text-xs font-semibold text-navy-authority">${r.empresa||"—"} <span class="font-normal text-steel-gray">— ${r.nombre||""}</span></p>
+          <p class="text-xs text-steel-gray">${r.origen||""} → ${r.destino||""} | ${r.carga||""} | ${new Date(r.ts).toLocaleDateString("es-PE",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</p>
+        </div>
+        <button onclick="loadReq(${i})" class="flex-shrink-0 text-xs font-semibold bg-navy-authority text-white px-3 py-1.5 rounded-lg">Cargar</button>
+      </div>`).join("");
+  }
+  panel.classList.remove("hidden");
+  sysGoTo(0);
+}
+
+function loadReq(idx){
+  const all=JSON.parse(localStorage.getItem("jhaz_requests")||"[]");
+  const r=all[idx];if(!r)return;
+  document.getElementById("s_cli").value=r.empresa||"";
+  document.getElementById("s_ate").value=r.nombre||"";
+  document.getElementById("s_ori").value=r.origen||"";
+  document.getElementById("s_dst").value=r.destino||"";
+  document.getElementById("s_car").value=r.carga||"";
+  document.getElementById("s_pes").value=r.peso||"";
+  document.getElementById("s_can").value=r.cant||"1";
+  document.getElementById("s_fec").value=r.fecha||"";
+  document.getElementById("s_add").value=(r.notas||"")+(r.valor?" — Valor: USD "+r.valor:"");
+  document.getElementById("load-panel").classList.add("hidden");
+  updateSysHeader();
+}
+
 
 // Init
 setTog("est","NO");setTog("esc","NO");
