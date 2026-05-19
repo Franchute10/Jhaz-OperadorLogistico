@@ -3,7 +3,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Cotización — Jhaz Operador Logístico</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<title>Cotización | Jhaz Operador Logístico</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -58,7 +62,7 @@ body{font-family:'Inter',sans-serif}
 <!-- ═══ NAV ═══ -->
 <nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 md:px-8 h-20 bg-surface border-b border-outline-variant shadow-sm">
   <div class="flex items-center gap-2">
-    <span class="text-xl font-bold text-navy-authority">Jhaz Operador Logístico</span>
+    <a href="index.html"><img src="assets/Logo_header.png" alt="Jhaz Operador Logístico" style="height:48px;border-radius:6px"></a>
   </div>
   <div class="hidden md:flex items-center gap-8">
     <a class="text-steel-gray text-sm hover:text-action-orange transition-colors" href="index.html">Inicio</a>
@@ -207,7 +211,7 @@ body{font-family:'Inter',sans-serif}
   <!-- Sys Nav -->
   <div class="sticky top-0 z-10 bg-navy-authority shadow-lg flex items-center justify-between px-5 py-3">
     <div class="flex items-center gap-3">
-      <div class="bg-action-orange text-navy-authority font-bold px-3 py-1 rounded-lg text-sm">JHAZ</div>
+      <img src="assets/Logo_header.png" alt="Jhaz" style="height:40px;border-radius:6px">
       <div><p class="text-white font-semibold text-sm">Sistema de Cotizaciones</p><p class="text-white/50 text-xs" id="sys-role-label">—</p></div>
     </div>
     <div class="flex items-center gap-3">
@@ -410,7 +414,7 @@ const DEMO_SEED = [
    carga:'Paneles Solares',unidad:'Tracto T3',semirremolque:'Semirremolque S3',
    cantidad:'5',peso:'25',largo:'12.5',ancho:'2.6',alto:'2.5',
    fechaCarga:'Fines de Junio 2026',permisos:'',estiba:'NO',escolta:'NO',
-   adicionales:"5 contenedores 40'HQ — Valor USD 50,000/cntr",
+   adicionales:"5 contenedores 40 HQ — Valor USD 50,000/cntr",
    costoUnit:'2800',monedaOps:'S/.',sobreestadia:'500',transitoDias:'2',notasOps:'',
    precioUnit:'3500',monedaPrecio:'S/.',credito:'30 días',validez:'07 días',notasDuena:'',
    estado:'listo',fecha:'18/05/2026'},
@@ -548,6 +552,7 @@ function renderHistCards(list){
   el.innerHTML=list.map(r=>{
     const mon=r.monedaPrecio||'S/.';
     const margen=r.costoUnit&&r.precioUnit?((parseFloat(r.precioUnit)-parseFloat(r.costoUnit))/parseFloat(r.costoUnit)*100).toFixed(0):'—';
+    const idx = histData.indexOf(r);
     return `<div class="bg-white border border-outline-variant rounded-xl p-4 mb-2 hover:border-navy-authority hover:shadow-sm transition">
       <div class="flex items-start justify-between gap-3">
         <div class="flex-1 min-w-0">
@@ -564,7 +569,7 @@ function renderHistCards(list){
             <span class="text-blue-700">Margen: <strong>${margen}%</strong></span>
           </div>
         </div>
-        <button onclick='useAsTemplate(${JSON.stringify(r).replace(/'/g,"\'")})'
+        <button onclick="useAsTemplate(${idx})"
           class="flex-shrink-0 bg-action-orange text-navy-authority text-xs font-bold px-3 py-2 rounded-xl hover:opacity-90 transition text-center leading-tight">
           Usar<br>como base
         </button>
@@ -572,7 +577,8 @@ function renderHistCards(list){
     </div>`;
   }).join('');
 }
-function useAsTemplate(r){
+function useAsTemplate(idx){
+  const r = histData[idx] || {};
   showNewForm();
   // Pre-fill route and unit data — cost shown as reference only
   document.getElementById('n_ori').value=r.origen||'';
