@@ -162,11 +162,11 @@ body{font-family:'Inter',sans-serif}
 </footer>
 
 <!-- ═══ SHARE MODAL ═══ -->
-<div id="share-modal" class="hidden fixed inset-0 z-50 bg-navy-authority/90 flex items-center justify-center px-4">
+<div id="share-modal" class="hidden fixed inset-0 bg-navy-authority/90 flex items-center justify-center px-4" style="z-index:9999">
   <div class="bg-white rounded-2xl p-7 w-full max-w-sm shadow-2xl">
     <div class="flex items-center justify-between mb-5">
       <h3 class="font-bold text-lg text-navy-authority">Compartir formulario</h3>
-      <button onclick="document.getElementById('share-modal').classList.add('hidden')" class="text-steel-gray hover:text-navy-authority"><span class="material-symbols-outlined">close</span></button>
+      <button onclick="const m=document.getElementById('share-modal');m.classList.add('hidden');m.style.display='none'" class="text-steel-gray hover:text-navy-authority"><span class="material-symbols-outlined">close</span></button>
     </div>
     <p class="text-sm text-steel-gray mb-4">Comparte este link con clientes o con el equipo para que ingresen sus solicitudes.</p>
     <div class="bg-surface-container rounded-xl p-3 flex items-center gap-2 mb-4">
@@ -186,7 +186,7 @@ body{font-family:'Inter',sans-serif}
 </div>
 
 <!-- ═══ PIN MODAL ═══ -->
-<div id="pin-modal" class="hidden fixed inset-0 z-50 bg-navy-authority/95 flex items-center justify-center px-4">
+<div id="pin-modal" class="hidden fixed inset-0 bg-navy-authority/95 flex items-center justify-center px-4" style="z-index:9998">
   <div class="bg-white rounded-2xl p-8 w-full max-w-sm text-center shadow-2xl">
     <div class="w-14 h-14 bg-navy-authority rounded-xl flex items-center justify-center mx-auto mb-4"><span class="material-symbols-outlined text-action-orange text-3xl">lock</span></div>
     <h3 class="font-bold text-xl text-navy-authority mb-1">Acceso Equipo Jhaz</h3>
@@ -928,15 +928,30 @@ async function markSent(){
 // ── COMPARTIR ──
 function showShare(){
   const url=window.location.href.split('?')[0];
-  document.getElementById('share-url').value=url;
-  const encoded=encodeURIComponent(url);
-  document.getElementById('qr-img').src=`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encoded}&color=1A365D&bgcolor=ffffff`;
-  document.getElementById('share-modal').classList.remove('hidden');
+  const inp=document.getElementById('share-url');
+  const modal=document.getElementById('share-modal');
+  const qr=document.getElementById('qr-img');
+  if(inp)inp.value=url;
+  if(qr){
+    const encoded=encodeURIComponent(url);
+    qr.src='https://api.qrserver.com/v1/create-qr-code/?size=160x160&data='+encoded+'&color=1A365D&bgcolor=ffffff';
+    qr.onerror=()=>{qr.src='https://chart.googleapis.com/chart?cht=qr&chs=160x160&chl='+encoded;};
+  }
+  if(modal){modal.style.display='flex';modal.classList.remove('hidden');}
+  else{alert('Comparte este link: '+url);}
 }
 function copyShareUrl(){
-  navigator.clipboard.writeText(document.getElementById('share-url').value).then(()=>{
+  const url=document.getElementById('share-url')?.value||window.location.href;
+  navigator.clipboard.writeText(url).then(()=>{
     const btn=document.getElementById('copy-share-btn');
-    btn.textContent='✓ Copiado';setTimeout(()=>btn.textContent='Copiar',2000);
+    if(btn){btn.textContent='✓ Copiado';setTimeout(()=>btn.textContent='Copiar',2000);}
+  }).catch(()=>{
+    // Fallback for older browsers
+    const ta=document.createElement('textarea');
+    ta.value=url;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+    const btn=document.getElementById('copy-share-btn');
+    if(btn){btn.textContent='✓ Copiado';setTimeout(()=>btn.textContent='Copiar',2000);}
   });
 }
 
