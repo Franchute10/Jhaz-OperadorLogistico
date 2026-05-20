@@ -106,7 +106,7 @@ body{font-family:'Inter',sans-serif}
       </div>
       <div class="bg-navy-authority p-5 rounded-xl text-white">
         <div class="flex items-center gap-2 mb-2"><span class="material-symbols-outlined text-action-orange text-xl">verified</span><span class="font-semibold text-sm">Respuesta garantizada</span></div>
-        <p class="text-primary-fixed-dim text-sm leading-relaxed">Respondemos toda solicitud en menor tiempo posible durante horario de atención.</p>
+        <p class="text-primary-fixed-dim text-sm leading-relaxed">Respondemos toda solicitud en el menor tiempo posible durante horario de atención.</p>
       </div>
     </div>
     <div class="lg:col-span-8">
@@ -116,7 +116,7 @@ body{font-family:'Inter',sans-serif}
         <div id="pub-success" class="hidden text-center py-10">
           <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><span class="material-symbols-outlined text-success-green text-4xl" style="font-variation-settings:'FILL' 1">check_circle</span></div>
           <h3 class="font-bold text-xl text-navy-authority mb-2">¡Solicitud enviada!</h3>
-          <p class="text-steel-gray mb-5">Un estratega comercial se pondrá en contacto en <strong>2 a 4 horas</strong>.</p>
+          <p class="text-steel-gray mb-5">Un estratega comercial se pondrá en contacto en <strong>a la brevedad posible</strong>.</p>
           <button onclick="resetPubForm()" class="text-sm text-navy-authority underline">Enviar otra solicitud</button>
         </div>
         <form id="pub-form" onsubmit="submitPub(event)">
@@ -159,7 +159,7 @@ body{font-family:'Inter',sans-serif}
 
 <footer class="bg-tertiary text-on-tertiary mt-8">
   <div class="w-full py-10 px-4 md:px-8 flex flex-col md:flex-row justify-between items-start md:items-center max-w-5xl mx-auto border-t border-outline/10">
-    <div class="mb-6 md:mb-0"><span class="text-lg font-bold">Jhaz Operador Logístico S.A.C.</span><p class="text-on-tertiary-container text-sm mt-1 max-w-sm">¡Confianza que llega a destino!</p><p class="text-on-tertiary-container text-xs mt-1">© 2026 Jhaz Operador Logístico S.A.C.</p></div>
+    <div class="mb-6 md:mb-0"><span class="text-lg font-bold">Jhaz Operador Logístico S.A.C.</span><p class="text-on-tertiary-container text-sm mt-1 max-w-sm">Confianza que llega a destino</p><p class="text-on-tertiary-container text-xs mt-1">© 2026 Jhaz Operador Logístico S.A.C.</p></div>
     <div class="flex flex-wrap gap-6"><a href="index.html" class="text-on-tertiary-container hover:text-white text-xs">Inicio</a><a href="servicios.html" class="text-on-tertiary-container hover:text-white text-xs">Servicios</a><a href="nosotros.html" class="text-on-tertiary-container hover:text-white text-xs">Nosotros</a></div>
     <div class="text-xs text-on-tertiary-container mt-4 md:mt-0">comercial1@jhaz.com.pe<br/>933-428-035 · San Miguel, Lima</div>
   </div>
@@ -405,7 +405,7 @@ const ROLES = {
 // ═══════════════════════════════════════
 
 // Detección de modo demo (sin backend configurado)
-const USE_LOCAL = !SCRIPT_URL || SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbx_viC-5lFNNGX_5cu8KBZfjV1DUc2E9D_48tlQ-5A-f3UBsZkuzF4-Aooj7MVq6cfSyg/exec';
+const USE_LOCAL = !SCRIPT_URL || SCRIPT_URL === 'TU_URL_DE_APPS_SCRIPT_AQUI';
 
 // Datos de demo (se usan cuando no hay backend configurado)
 const DEMO_SEED = [
@@ -483,7 +483,7 @@ const fmt=v=>parseFloat(v||0).toLocaleString('es-PE',{minimumFractionDigits:2,ma
 const gv=id=>(document.getElementById(id)||{}).value||'';
 const TERMS=['Tarifa no incluye IGV.','Unidades con GPS y equipo de comunicación.','Conductores con documentos en regla según disposición del MTC.','Documentos solicitados según requerimiento del cliente.',"Personal con EPP's y SCTR.",'No incluye carga y/o descarga ni resguardo. En caso sea solicitado, se contratará previa autorización del cliente.'];
 
-let role='', togV={est:'NO',esc:'NO'}, currentReq=null;
+let role='', togV={est:'NO',esc:'NO'}, currentReq=null, allRequests=[];
 
 // ── PIN ──
 function openPin(){document.getElementById('pin-modal').classList.remove('hidden');setTimeout(()=>document.getElementById('pin-inp').focus(),100);}
@@ -506,7 +506,7 @@ function showView(v){
   const el=document.getElementById('view-'+v);if(el)el.classList.remove('hidden');
 }
 function readyCard(r){
-  return `<div class="bg-white border-2 border-green-400 rounded-xl p-4 mb-3 cursor-pointer hover:shadow-md transition" onclick="openQuote(${JSON.stringify(r).replace(/'/g,'&#39;').replace(/"/g,'&quot;')})">
+  return `<div class="bg-white border-2 border-green-400 rounded-xl p-4 mb-3 cursor-pointer hover:shadow-md transition" onclick="handleCard('${r.id}','Ver')">
     <div class="flex items-start justify-between gap-3">
       <div class="flex-1">
         <div class="flex items-center gap-2 mb-1 flex-wrap">
@@ -523,6 +523,13 @@ function readyCard(r){
       </button>
     </div>
   </div>`;
+}
+function handleCard(id,action){
+  const r=allRequests.find(x=>String(x.id)===String(id));
+  if(!r)return;
+  if(action==='Ingresar costo')openOpsForm(r);
+  else if(action==='Aprobar precio')openDnaForm(r);
+  else openQuote(r);
 }
 function showNewForm(){showView('new-req');}
 let histData=[];
@@ -630,7 +637,7 @@ async function loadData(){
   }
 }
 
-function renderRole(all){
+function renderRole(all){allRequests=all;
   if(role==='comercial'){
     const enProceso=all.filter(r=>['pendiente_costo','pendiente_precio'].includes(r.estado));
     const listos=all.filter(r=>r.estado==='listo');
@@ -675,7 +682,7 @@ function reqCard(r,onAction,btnLabel,btnColor){
         <p class="text-xs text-steel-gray">${r.carga||'—'} | ${r.cantidad||'?'} × ${r.unidad||'?'} | ${r.peso||'?'} TN/und</p>
         <p class="text-xs text-steel-gray/70 mt-1">${r.fecha||''}</p>
       </div>
-      ${hasbtn?`<button onclick="(${onAction.toString()})()" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-white text-xs font-semibold" style="background:${btnColor||'#1A365D'}">${btnLabel}</button>`:''}
+      ${hasbtn?`<button onclick="handleCard('${r.id}','${btnLabel}')" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-white text-xs font-semibold" style="background:${btnColor||'#1A365D'}">${btnLabel}</button>`:''}
     </div>
   </div>`;
 }
@@ -847,7 +854,7 @@ function openQuote(r){
   document.getElementById('quote-doc').innerHTML=`
 <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #1A365D;padding-bottom:14px;margin-bottom:18px">
   <div><div style="background:#1A365D;color:#F6AD55;font-weight:700;font-size:17px;padding:7px 16px;border-radius:8px;display:inline-block;letter-spacing:.04em;margin-bottom:5px">JHAZ</div>
-    <div style="font-size:11px;color:#4A5568">Operador Logístico S.A.C.</div><div style="font-size:10px;color:#9aa5b4">¡Confianza que llega a destino!</div></div>
+    <div style="font-size:11px;color:#4A5568">Operador Logístico S.A.C.</div><div style="font-size:10px;color:#9aa5b4">Confianza que llega a destino</div></div>
   <div style="text-align:right"><div style="font-size:16px;font-weight:700;color:#1A365D">PROPUESTA N° JHAZ 2026-${r.propNum||'—'}</div>
     <div style="font-size:12px;color:#4A5568;margin-top:5px">Lima, ${todayStr()}</div></div>
 </div>
