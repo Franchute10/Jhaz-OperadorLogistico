@@ -599,9 +599,7 @@ function useAsTemplate(idx){
   document.getElementById('n_prop').value=String(parseInt(r.propNum||'050')+1).padStart(3,'0');
   // Show reference note
   const mon=r.monedaOps||'S/.';
-  document.getElementById('n_add').value='[REFERENCIA RUTA ANTERIOR — REQ '+r.propNum+' ('+r.fecha+'): Costo: '+mon+' '+fmt(r.costoUnit)+'/und | Precio cobrado: '+(r.monedaPrecio||'S/.')+' '+fmt(r.precioUnit)+'/und | Margen: '+((parseFloat(r.precioUnit)-parseFloat(r.costoUnit))/parseFloat(r.costoUnit)*100).toFixed(0)+'%]
-
-Elimina esta nota antes de guardar.';
+  document.getElementById('n_add').value='[REFERENCIA RUTA ANTERIOR — REQ '+r.propNum+' ('+r.fecha+'): Costo: '+mon+' '+fmt(r.costoUnit)+'/und | Precio cobrado: '+(r.monedaPrecio||'S/.')+' '+fmt(r.precioUnit)+'/und | Margen: '+((parseFloat(r.precioUnit)-parseFloat(r.costoUnit))/parseFloat(r.costoUnit)*100).toFixed(0)+'%]\n\nElimina esta nota antes de guardar.';
   tog('est',r.estiba||'NO');tog('esc',r.escolta||'NO');
 }
 
