@@ -348,7 +348,7 @@ body{font-family:'Inter',sans-serif}
         <div class="ff"><label class="fl">Sobreestadía / día / unidad (S/.)</label><input class="fi" id="o_sob" type="number" value="500"/></div>
       </div>
       <div class="ff"><label class="fl">Tiempo de tránsito (días)</label><input class="fi" id="o_tra" type="number" value="2" style="width:160px"/></div>
-      <div class="ff"><label class="fl">Notas para la dueña (condiciones especiales)</label><textarea class="fi" id="o_not" style="min-height:60px" placeholder="Requiere equipo especial, peajes incluidos, etc."></textarea></div>
+      <div class="ff"><label class="fl">Notas para la Carmen (condiciones especiales)</label><textarea class="fi" id="o_not" style="min-height:60px" placeholder="Requiere equipo especial, peajes incluidos, etc."></textarea></div>
     </div>
     <button onclick="saveOps()" class="w-full py-3.5 bg-navy-authority text-white font-bold rounded-xl hover:opacity-90 transition">Guardar costo y pasar a Aprobación</button>
     <div id="ops-save-msg" class="hidden mt-3 p-3 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800 text-center font-semibold"></div>
@@ -400,12 +400,12 @@ const FORMSPREE   = 'xaqknqkw';                    // ← Ya configurado
 const ROLES = {
   'JHAZ2026':  'comercial',    // Frank — crea requerimientos y descarga cotizaciones
   'OPS2026':   'operaciones',  // Equipo ops — ingresa costos
-  'DUENA2026': 'duena'         // Dueña — aprueba precios finales
+  'CARMEN2026': 'duena'         // Dueña — aprueba precios finales
 };
 // ═══════════════════════════════════════
 
 // Detección de modo demo (sin backend configurado)
-const USE_LOCAL = !SCRIPT_URL || SCRIPT_URL === 'TU_URL_DE_APPS_SCRIPT_AQUI';
+const USE_LOCAL = !SCRIPT_URL || SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbx_viC-5lFNNGX_5cu8KBZfjV1DUc2E9D_48tlQ-5A-f3UBsZkuzF4-Aooj7MVq6cfSyg/exec';
 
 // Datos de demo (se usan cuando no hay backend configurado)
 const DEMO_SEED = [
